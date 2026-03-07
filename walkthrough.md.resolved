@@ -1,0 +1,134 @@
+# 个人学术主页 — 完工验收报告
+
+## ✅ 所有页面均已验证通过
+
+### 主页 (`/`) — 首屏效果
+
+![主页截图](C:\Users\AW\.gemini\antigravity\brain\87e3bbd5-c231-43c5-9d97-a4cb29fbbe2d\home_page_1772857700146.png)
+
+- 深邃暗色调极光背景（青橙两色渐变光斑，缓慢浮动）
+- 你的名言**打字机逐字出现**，带光标闪烁效果
+- 右上显示实时时间 `12:28:19` + 中文日期（2026年3月7日星期六）
+- 姓名 `Cao Jiahao` 双色渐变大字体
+- 定位标签：西安交通大学 · 软件工程
+- CTA 按钮：了解我 / 查看研究
+
+---
+
+### 文章页 (`/articles`)
+
+![文章页截图](C:\Users\AW\.gemini\antigravity\brain\87e3bbd5-c231-43c5-9d97-a4cb29fbbe2d\articles_page_1772857708880.png)
+
+- Medium 风极简列表，可搜索、可按标签过滤
+- 展示阅读时长、日期、分类标签
+- 2 篇示例文章已就位
+
+---
+
+### 项目页 (`/projects`)
+
+![项目页截图](C:\Users\AW\.gemini\antigravity\brain\87e3bbd5-c231-43c5-9d97-a4cb29fbbe2d\projects_page_1772857717465.png)
+
+- 响应式卡片网格，卡片有渐变图头区域
+- 技术栈彩色徽章（Next.js / TypeScript / Tailwind / Framer Motion）
+- GitHub / Demo 链接图标
+
+---
+
+### 研究页 (`/research`)
+
+![研究页截图](C:\Users\AW\.gemini\antigravity\brain\87e3bbd5-c231-43c5-9d97-a4cb29fbbe2d\research_page_1772857725412.png)
+
+- 学术风列表：论文标题、作者（本人加粗）、期刊/会议（橙色斜体）
+- BibTeX 折叠按钮，点击展开可一键复制
+
+---
+
+### 关于页 (`/about`) — 暗色 & 亮色模式
+
+````carousel
+![关于页截图（暗色）](C:\Users\AW\.gemini\antigravity\brain\87e3bbd5-c231-43c5-9d97-a4cb29fbbe2d\about_page_dark_1772857733031.png)
+<!-- slide -->
+![关于页截图（亮色）](C:\Users\AW\.gemini\antigravity\brain\87e3bbd5-c231-43c5-9d97-a4cb29fbbe2d\about_page_light_1772857742214.png)
+````
+
+- 左栏：头像 + 姓名 + 头衔 + 社交链接 + 技能标签云（按编程语言/框架/工具分组）
+- 右栏：个人简介 + 教育经历时间轴 + 实践经历时间轴
+- 暗色 / 亮色主题一键切换 ✅
+
+---
+
+## 📂 项目文件结构
+
+```
+e:/PersonalhomeP/
+├── app/
+│   ├── layout.tsx          # 根布局（Navbar + Footer + ThemeProvider）
+│   ├── page.tsx            # 主页
+│   ├── articles/page.tsx   # 文章列表
+│   ├── articles/[slug]/    # 文章详情
+│   ├── projects/page.tsx   # 项目卡片
+│   ├── research/page.tsx   # 论文列表
+│   └── about/page.tsx      # 关于我
+├── components/
+│   ├── Navbar.tsx / Footer.tsx / ThemeToggle.tsx
+│   ├── Clock.tsx / TypewriterQuote.tsx / NewsTimeline.tsx
+│   ├── ArticlesClient.tsx / ProjectsClient.tsx / ResearchClient.tsx
+│   └── TagFilter.tsx
+├── lib/mdx.ts              # Markdown 内容解析工具
+└── content/
+    ├── articles/           # 放你的 .md 文章
+    ├── projects/           # 放你的 .md 项目
+    └── research/           # 放你的 .md 论文
+```
+
+## 🚀 如何添加新内容
+
+在对应目录新建 [.md](file:///e:/PersonalhomeP/content/articles/react-hooks.md) 文件，格式如下：
+
+**文章示例**:
+```md
+---
+title: "文章标题"
+date: "2025-04-01"
+description: "一句话描述"
+tags: ["标签1", "标签2"]
+---
+正文内容...
+```
+
+**项目示例**:
+```md
+---
+title: "项目名"
+date: "2025-04-01"
+description: "项目描述"
+tags: ["Web开发"]
+tech: ["React", "Python"]
+github: "https://github.com/..."
+demo: "https://..."
+image: "🛠️"
+---
+```
+
+**论文示例**:
+```md
+---
+title: "论文标题"
+date: "2025-04"
+authors: ["曹嘉豪", "其他作者"]
+venue: "会议/期刊名"
+tags: ["研究方向"]
+pdf: "https://..."
+bibtex: "@inproceedings{...}"
+---
+```
+
+## 🔧 后续可定制的内容
+
+| 文件 | 用途 |
+|------|------|
+| [app/page.tsx](file:///e:/PersonalhomeP/app/page.tsx) | 修改 `newsData` 数组更新动态 |
+| [app/about/page.tsx](file:///e:/PersonalhomeP/app/about/page.tsx) | 修改 `education` / `experience` / `skills` 对象 |
+| [components/Footer.tsx](file:///e:/PersonalhomeP/components/Footer.tsx) | 修改社交媒体链接 |
+| [app/globals.css](file:///e:/PersonalhomeP/app/globals.css) | 调整颜色主题 Token |
