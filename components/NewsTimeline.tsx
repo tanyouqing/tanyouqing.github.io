@@ -11,25 +11,21 @@ interface NewsItem {
 }
 
 const newsData: NewsItem[] = [
-    {
-        date: '2025.09',
-        type: 'event',
-        content: '即将入读西安交通大学软件工程硕士项目，开启新的学术旅程。',
-    },
-    {
-        date: '2025.06',
-        type: 'award',
-        content: '本科毕业，主修软件工程，来自西安交通大学。',
-    },
+
     {
         date: '2025.03',
         type: 'post',
-        content: '完成毕业设计项目，探索前沿软件工程技术方向。',
+        content: '开始毕业设计项目，探索文生图大模型后门攻击方向。',
     },
     {
-        date: '2024.12',
+        date: '2025.03',
         type: 'event',
-        content: '参与学院年度学术交流论坛，展示个人项目成果。',
+        content: '参与成都上程大数据公司实习，担任项目经理。',
+    },
+    {
+        date: '2024.7',
+        type: 'award',
+        content: '参与NUS Soc项目，学习并实践AI for finance，获得评级A',
     },
 ];
 
