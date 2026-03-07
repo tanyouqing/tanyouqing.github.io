@@ -35,7 +35,7 @@ export default function HomePage() {
                             Quote of Life
                         </p>
                         <blockquote
-                            className="font-quote text-lg sm:text-2xl md:text-3xl font-medium leading-loose whitespace-nowrap
+                            className="font-quote text-2xl md:text-3xl font-medium leading-loose md:whitespace-nowrap
                 text-slate-700 dark:text-[#e8e4de]"
                         >
                             <TypewriterQuote text={QUOTE} speed={70} />
