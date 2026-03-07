@@ -40,7 +40,7 @@ function BibTeXPanel({ bibtex }: { bibtex: string }) {
                         transition={{ duration: 0.25 }}
                         className="overflow-hidden"
                     >
-                        <div className="mt-2 relative rounded-xl bg-slate-900 dark:bg-black/40 border border-[var(--border)] p-4">
+                        <div className="mt-2 relative rounded-xl bg-slate-900 dark:bg-[#141413] border border-[var(--border)] p-4">
                             <button
                                 onClick={handleCopy}
                                 className="absolute top-3 right-3 p-1.5 rounded-lg bg-white/5 hover:bg-white/10
@@ -85,7 +85,7 @@ export function ResearchClient({ papers, tags }: ResearchClientProps) {
                         className="w-full pl-10 pr-4 py-2.5 rounded-xl
               bg-[var(--card)] border border-[var(--border)]
               text-[var(--fg)] placeholder:text-[var(--muted)]
-              focus:outline-none focus:border-orange-400/50 text-sm transition-colors"
+              focus:outline-none focus:border-orange-400/50 dark:focus:border-[#c9a55a]/40 text-sm transition-colors"
                     />
                 </div>
                 <TagFilter tags={tags} selected={selectedTag} onSelect={setSelectedTag} />
@@ -106,7 +106,7 @@ export function ResearchClient({ papers, tags }: ResearchClientProps) {
                         >
                             {/* Title */}
                             <Link href={`/research/${paper.slug}`}>
-                                <h2 className="text-base font-semibold text-[var(--fg)] leading-snug hover:text-orange-400 transition-colors cursor-pointer">
+                                <h2 className="text-base font-semibold text-[var(--fg)] leading-snug hover:text-orange-400 dark:hover:text-[#d4b978] transition-colors cursor-pointer">
                                     {paper.title}
                                 </h2>
                             </Link>
@@ -128,7 +128,7 @@ export function ResearchClient({ papers, tags }: ResearchClientProps) {
                             {/* Venue */}
                             {paper.venue && (
                                 <p className="text-sm">
-                                    <span className="italic text-orange-400/80">{paper.venue}</span>
+                                    <span className="italic text-orange-400/80 dark:text-[#d4b978]/80">{paper.venue}</span>
                                     <span className="text-[var(--muted)] ml-2 font-mono text-xs">{paper.date}</span>
                                 </p>
                             )}

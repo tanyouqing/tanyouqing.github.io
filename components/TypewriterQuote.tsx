@@ -38,8 +38,8 @@ export function TypewriterQuote({ text, speed = 80, className = '' }: Typewriter
         <span className={className}>
             {displayed}
             <span
-                className={`inline-block w-0.5 h-[1.1em] align-middle ml-0.5 bg-current
-          transition-opacity duration-100 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}
+                className={`inline-block h-[1.1em] align-middle ml-0.5 bg-current
+          transition-all duration-150 ${done ? 'opacity-0 w-0' : `w-0.5 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}`}
             />
         </span>
     );

@@ -31,13 +31,14 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
         <article className="max-w-3xl mx-auto px-6 py-12">
             <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 text-sm text-[var(--muted)] hover:text-cyan-500 transition-colors mb-8"
+                className="inline-flex items-center gap-2 text-sm text-[var(--muted)] hover:text-cyan-500 dark:hover:text-[#c9a55a] transition-colors mb-8"
             >
                 <ArrowLeft size={14} /> 返回项目列表
             </Link>
 
             {/* Hero */}
             <div className="rounded-2xl bg-gradient-to-br from-cyan-500/15 via-transparent to-orange-400/10
+        dark:from-[#c9a55a]/10 dark:to-[#8a7340]/6
         border border-[var(--border)] p-8 mb-8 flex flex-col items-center gap-3 text-center">
                 <span className="text-6xl">{meta.image ?? '🛠️'}</span>
                 <h1 className="text-3xl font-bold text-[var(--fg)]">{meta.title}</h1>
@@ -51,14 +52,14 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
                         <a href={meta.github} target="_blank" rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium
                 border border-[var(--border)] bg-[var(--card)] text-[var(--fg)]
-                hover:border-cyan-500/40 transition-all">
+                hover:border-cyan-500/40 dark:hover:border-[#c9a55a]/30 transition-all">
                             <Github size={14} /> GitHub
                         </a>
                     )}
                     {meta.demo && (
                         <a href={meta.demo} target="_blank" rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium
-                bg-cyan-500 text-white hover:bg-cyan-400 transition-all shadow-lg shadow-cyan-500/20">
+                bg-cyan-500 dark:bg-[#c9a55a] text-white hover:bg-cyan-400 dark:hover:bg-[#d4b978] transition-all shadow-lg shadow-cyan-500/20 dark:shadow-[#c9a55a]/15">
                             <ExternalLink size={14} /> Demo
                         </a>
                     )}

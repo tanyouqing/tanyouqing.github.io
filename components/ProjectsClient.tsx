@@ -61,7 +61,7 @@ export function ProjectsClient({ projects, tags }: ProjectsClientProps) {
                         className="w-full pl-10 pr-4 py-2.5 rounded-xl
               bg-[var(--card)] border border-[var(--border)]
               text-[var(--fg)] placeholder:text-[var(--muted)]
-              focus:outline-none focus:border-cyan-500/50 text-sm transition-colors"
+              focus:outline-none focus:border-cyan-500/50 dark:focus:border-[#c9a55a]/40 text-sm transition-colors"
                     />
                 </div>
                 <TagFilter tags={tags} selected={selectedTag} onSelect={setSelectedTag} />
@@ -84,9 +84,10 @@ export function ProjectsClient({ projects, tags }: ProjectsClientProps) {
                         >
                             {/* Gradient Header */}
                             <div className="h-32 bg-gradient-to-br from-cyan-500/20 via-transparent to-orange-400/10
+                dark:from-[#c9a55a]/12 dark:to-[#8a7340]/8
                 flex items-center justify-center relative overflow-hidden">
                                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500
-                  bg-gradient-to-br from-cyan-500/10 to-orange-400/10" />
+                  bg-gradient-to-br from-cyan-500/10 to-orange-400/10 dark:from-[#c9a55a]/8 dark:to-[#8a7340]/6" />
                                 <span className="text-5xl">
                                     {project.image ?? '🛠️'}
                                 </span>
@@ -95,7 +96,7 @@ export function ProjectsClient({ projects, tags }: ProjectsClientProps) {
                             {/* Card Body */}
                             <div className="p-5 flex flex-col gap-3 flex-1">
                                 <div className="flex items-start justify-between gap-2">
-                                    <h2 className="font-semibold text-[var(--fg)] group-hover:text-cyan-500 transition-colors leading-snug">
+                                    <h2 className="font-semibold text-[var(--fg)] group-hover:text-cyan-500 dark:group-hover:text-[#c9a55a] transition-colors leading-snug">
                                         {project.title}
                                     </h2>
                                     <div className="flex gap-2 flex-shrink-0">
@@ -109,7 +110,7 @@ export function ProjectsClient({ projects, tags }: ProjectsClientProps) {
                                         {project.demo && (
                                             <a href={project.demo} target="_blank" rel="noopener noreferrer"
                                                 onClick={e => e.stopPropagation()}
-                                                className="text-[var(--muted)] hover:text-cyan-500 transition-colors" aria-label="Demo">
+                                                className="text-[var(--muted)] hover:text-cyan-500 dark:hover:text-[#c9a55a] transition-colors" aria-label="Demo">
                                                 <ExternalLink size={15} />
                                             </a>
                                         )}

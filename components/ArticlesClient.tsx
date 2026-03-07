@@ -38,7 +38,7 @@ export function ArticlesClient({ articles, tags }: ArticlesClientProps) {
                         className="w-full pl-10 pr-4 py-2.5 rounded-xl
               bg-[var(--card)] border border-[var(--border)]
               text-[var(--fg)] placeholder:text-[var(--muted)]
-              focus:outline-none focus:border-cyan-500/50 text-sm transition-colors"
+              focus:outline-none focus:border-cyan-500/50 dark:focus:border-[#c9a55a]/40 text-sm transition-colors"
                     />
                 </div>
                 <TagFilter tags={tags} selected={selectedTag} onSelect={setSelectedTag} />
@@ -59,10 +59,10 @@ export function ArticlesClient({ articles, tags }: ArticlesClientProps) {
                         >
                             <Link href={`/articles/${article.slug}`} className="block space-y-2">
                                 <div className="flex items-start justify-between gap-4">
-                                    <h2 className="text-lg font-semibold text-[var(--fg)] group-hover:text-cyan-500 transition-colors leading-snug">
+                                    <h2 className="text-lg font-semibold text-[var(--fg)] group-hover:text-cyan-500 dark:group-hover:text-[#c9a55a] transition-colors leading-snug">
                                         {article.title}
                                     </h2>
-                                    <ArrowRight size={16} className="flex-shrink-0 mt-1 text-[var(--muted)] group-hover:text-cyan-500 group-hover:translate-x-1 transition-all" />
+                                    <ArrowRight size={16} className="flex-shrink-0 mt-1 text-[var(--muted)] group-hover:text-cyan-500 dark:group-hover:text-[#c9a55a] group-hover:translate-x-1 transition-all" />
                                 </div>
                                 {article.description && (
                                     <p className="text-sm text-[var(--muted)] leading-relaxed line-clamp-2">

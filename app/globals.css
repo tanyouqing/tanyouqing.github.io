@@ -16,13 +16,13 @@
 }
 
 .dark {
-  --bg: #080c18;
-  --fg: #e2e8f0;
-  --muted: #94a3b8;
-  --border: #1e293b;
-  --card: #0f172a;
-  --accent-from: #22d3ee;
-  --accent-to: #fb923c;
+  --bg: #111110;
+  --fg: #e8e4de;
+  --muted: #8a857d;
+  --border: #2a2825;
+  --card: #1a1917;
+  --accent-from: #c9a55a;
+  --accent-to: #e2c67e;
 }
 
 /* ── Base ── */
@@ -94,49 +94,68 @@ body {
 }
 
 .dark .aurora-bg::before {
-  opacity: 0.25;
-  background: radial-gradient(circle, #0891b2 0%, transparent 70%);
+  opacity: 0.08;
+  background: radial-gradient(circle, #c9a55a 0%, transparent 70%);
 }
 
 .dark .aurora-bg::after {
-  opacity: 0.2;
-  background: radial-gradient(circle, #ea580c 0%, transparent 70%);
+  opacity: 0.06;
+  background: radial-gradient(circle, #8a7340 0%, transparent 70%);
 }
 
 @keyframes aurora-float {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(5%, 8%) scale(1.05); }
-  66% { transform: translate(-4%, 5%) scale(0.97); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(5%, 8%) scale(1.05);
+  }
+
+  66% {
+    transform: translate(-4%, 5%) scale(0.97);
+  }
 }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(to bottom, #06b6d4, #f97316);
   border-radius: 999px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #c9a55a, #8a7340);
 }
 
 /* ── Card Hover Glow ── */
 .card-hover {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+
 .card-hover:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 40px -8px rgba(6, 182, 212, 0.25);
 }
+
 .dark .card-hover:hover {
-  box-shadow: 0 12px 40px -8px rgba(6, 182, 212, 0.3);
+  box-shadow: 0 12px 40px -8px rgba(201, 165, 90, 0.12);
 }
 
 /* ── Timeline ── */
 .timeline-line {
   position: relative;
 }
+
 .timeline-line::before {
   content: '';
   position: absolute;
@@ -146,6 +165,11 @@ body {
   width: 2px;
   background: linear-gradient(to bottom, #06b6d4, #f97316);
   opacity: 0.4;
+}
+
+.dark .timeline-line::before {
+  background: linear-gradient(to bottom, #c9a55a, #8a7340);
+  opacity: 0.3;
 }
 
 /* ── Tag Badge ── */
@@ -163,30 +187,70 @@ body {
   cursor: pointer;
   white-space: nowrap;
 }
+
 .tag-badge:hover,
 .tag-badge.active {
   background: rgba(6, 182, 212, 0.2);
   border-color: rgba(6, 182, 212, 0.5);
 }
+
 .dark .tag-badge {
-  background: rgba(34, 211, 238, 0.08);
-  color: #22d3ee;
-  border-color: rgba(34, 211, 238, 0.2);
+  background: rgba(201, 165, 90, 0.08);
+  color: #d4b978;
+  border-color: rgba(201, 165, 90, 0.18);
 }
+
 .dark .tag-badge:hover,
 .dark .tag-badge.active {
-  background: rgba(34, 211, 238, 0.18);
-  border-color: rgba(34, 211, 238, 0.4);
+  background: rgba(201, 165, 90, 0.16);
+  border-color: rgba(201, 165, 90, 0.35);
 }
 
 /* ── MDX content styles ── */
-.mdx-content h1 { @apply text-3xl font-bold mt-8 mb-4; }
-.mdx-content h2 { @apply text-2xl font-semibold mt-6 mb-3; }
-.mdx-content h3 { @apply text-xl font-semibold mt-5 mb-2; }
-.mdx-content p  { @apply leading-7 mb-4 text-[var(--muted)]; }
-.mdx-content a  { @apply text-cyan-500 underline; }
-.mdx-content code { @apply font-mono text-sm bg-[var(--card)] px-1.5 py-0.5 rounded; }
-.mdx-content pre { @apply bg-[var(--card)] rounded-xl p-4 overflow-x-auto mb-4; }
-.mdx-content ul { @apply list-disc ml-6 mb-4 space-y-1; }
-.mdx-content ol { @apply list-decimal ml-6 mb-4 space-y-1; }
-.mdx-content blockquote { @apply border-l-4 border-cyan-500 pl-4 italic text-[var(--muted)] mb-4; }
+.mdx-content h1 {
+  @apply text-3xl font-bold mt-8 mb-4;
+}
+
+.mdx-content h2 {
+  @apply text-2xl font-semibold mt-6 mb-3;
+}
+
+.mdx-content h3 {
+  @apply text-xl font-semibold mt-5 mb-2;
+}
+
+.mdx-content p {
+  @apply leading-7 mb-4 text-[var(--muted)];
+}
+
+.mdx-content a {
+  @apply text-cyan-500 underline;
+}
+
+.dark .mdx-content a {
+  color: #d4b978;
+}
+
+.mdx-content code {
+  @apply font-mono text-sm bg-[var(--card)] px-1.5 py-0.5 rounded;
+}
+
+.mdx-content pre {
+  @apply bg-[var(--card)] rounded-xl p-4 overflow-x-auto mb-4;
+}
+
+.mdx-content ul {
+  @apply list-disc ml-6 mb-4 space-y-1;
+}
+
+.mdx-content ol {
+  @apply list-decimal ml-6 mb-4 space-y-1;
+}
+
+.mdx-content blockquote {
+  @apply border-l-4 border-cyan-500 pl-4 italic text-[var(--muted)] mb-4;
+}
+
+.dark .mdx-content blockquote {
+  border-color: #c9a55a;
+}

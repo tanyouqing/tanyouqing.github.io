@@ -20,7 +20,7 @@ export default function ResearchDetailPage({ params }: { params: { slug: string 
         <article className="max-w-3xl mx-auto px-6 py-12">
             <Link
                 href="/research"
-                className="inline-flex items-center gap-2 text-sm text-[var(--muted)] hover:text-orange-400 transition-colors mb-8"
+                className="inline-flex items-center gap-2 text-sm text-[var(--muted)] hover:text-orange-400 dark:hover:text-[#d4b978] transition-colors mb-8"
             >
                 <ArrowLeft size={14} /> 返回研究列表
             </Link>
@@ -52,7 +52,7 @@ export default function ResearchDetailPage({ params }: { params: { slug: string 
                 {/* Venue + Date */}
                 {meta.venue && (
                     <p>
-                        <span className="italic text-orange-400">{meta.venue}</span>
+                        <span className="italic text-orange-400 dark:text-[#d4b978]">{meta.venue}</span>
                         <span className="text-[var(--muted)] font-mono text-sm ml-2">{meta.date}</span>
                     </p>
                 )}
@@ -70,7 +70,7 @@ export default function ResearchDetailPage({ params }: { params: { slug: string 
                         <a href={meta.code} target="_blank" rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium
                 border border-[var(--border)] bg-[var(--card)] text-[var(--fg)]
-                hover:border-cyan-500/30 transition-all">
+                hover:border-cyan-500/30 dark:hover:border-[#c9a55a]/25 transition-all">
                             <Code2 size={14} /> Code
                         </a>
                     )}

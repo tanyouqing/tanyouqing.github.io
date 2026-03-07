@@ -73,16 +73,16 @@ function TimelineItem({ item, i }: {
         >
             {/* Dot */}
             <div className="absolute left-0 top-1 w-7 h-7 rounded-full
-        bg-gradient-to-br from-cyan-500/20 to-orange-400/20
-        border border-cyan-500/30 flex items-center justify-center text-sm">
+        bg-gradient-to-br from-cyan-500/20 to-orange-400/20 dark:from-[#c9a55a]/15 dark:to-[#8a7340]/10
+        border border-cyan-500/30 dark:border-[#c9a55a]/25 flex items-center justify-center text-sm">
                 {item.icon}
             </div>
             {/* Vertical line */}
-            <div className="absolute left-3.5 top-8 bottom-0 w-px bg-gradient-to-b from-cyan-500/30 to-transparent" />
+            <div className="absolute left-3.5 top-8 bottom-0 w-px bg-gradient-to-b from-cyan-500/30 dark:from-[#c9a55a]/25 to-transparent" />
 
             <div className="pb-8 space-y-1">
                 <h3 className="font-semibold text-[var(--fg)]">{item.degree ?? item.title}</h3>
-                <p className="text-sm text-cyan-500 font-medium">{item.school ?? item.org}</p>
+                <p className="text-sm text-cyan-500 dark:text-[#c9a55a] font-medium">{item.school ?? item.org}</p>
                 <p className="text-xs font-mono text-[var(--muted)]">{item.period}</p>
                 <p className="text-sm text-[var(--muted)] leading-relaxed mt-1">{item.description}</p>
             </div>
@@ -94,7 +94,7 @@ export default function AboutPage() {
     return (
         <div className="max-w-5xl mx-auto px-6 py-12">
             <div className="mb-10 space-y-2">
-                <p className="text-xs font-mono tracking-widest uppercase text-cyan-500">About</p>
+                <p className="text-xs font-mono tracking-widest uppercase text-cyan-500 dark:text-[#c9a55a]">About</p>
                 <h1 className="text-4xl font-bold text-[var(--fg)]">关于我</h1>
             </div>
 
@@ -108,8 +108,8 @@ export default function AboutPage() {
                 >
                     {/* Avatar */}
                     <div className="relative group">
-                        <div className="w-44 h-44 rounded-full overflow-hidden ring-2 ring-cyan-500/30 ring-offset-2 ring-offset-[var(--bg)]
-              shadow-2xl shadow-cyan-500/20 relative">
+                        <div className="w-44 h-44 rounded-full overflow-hidden ring-2 ring-cyan-500/30 dark:ring-[#c9a55a]/25 ring-offset-2 ring-offset-[var(--bg)]
+              shadow-2xl shadow-cyan-500/20 dark:shadow-[#c9a55a]/10 relative">
                             {/* 如果你想换回 emoji，可以取消下面注释，并把 Image 标签删掉 */}
                             {/* <div className="w-full h-full bg-gradient-to-br from-cyan-500 via-slate-600 to-orange-400 flex items-center justify-center text-7xl select-none">🎓</div> */}
 
@@ -121,6 +121,7 @@ export default function AboutPage() {
                             />
                         </div>
                         <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-500/20 to-orange-400/20
+              dark:from-[#c9a55a]/15 dark:to-[#8a7340]/10
               opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
 
@@ -130,11 +131,11 @@ export default function AboutPage() {
                             <span className="gradient-text">Cao</span> Jiahao · 曹家豪
                         </h2>
                         <p className="text-sm text-[var(--muted)] flex items-center justify-center gap-1">
-                            <GraduationCap size={13} className="text-cyan-500" />
+                            <GraduationCap size={13} className="text-cyan-500 dark:text-[#c9a55a]" />
                             软件工程 硕士研究生（准）
                         </p>
                         <p className="text-sm text-[var(--muted)] flex items-center justify-center gap-1">
-                            <MapPin size={13} className="text-orange-400" />
+                            <MapPin size={13} className="text-orange-400 dark:text-[#d4b978]" />
                             西安交通大学
                         </p>
                     </div>
@@ -146,7 +147,7 @@ export default function AboutPage() {
                                 rel="noopener noreferrer"
                                 className={`w-9 h-9 flex items-center justify-center rounded-full
                   border border-[var(--border)] bg-[var(--card)]
-                  text-[var(--muted)] ${color} transition-all hover:border-cyan-500/40 hover:scale-110`}
+                  text-[var(--muted)] ${color} transition-all hover:border-cyan-500/40 dark:hover:border-[#c9a55a]/30 hover:scale-110`}
                                 aria-label={label}>
                                 <Icon size={15} />
                             </a>
@@ -199,7 +200,7 @@ export default function AboutPage() {
                     {/* Education Timeline */}
                     <div className="space-y-4">
                         <h3 className="text-xl font-semibold text-[var(--fg)] flex items-center gap-2">
-                            <GraduationCap size={18} className="text-cyan-500" />
+                            <GraduationCap size={18} className="text-cyan-500 dark:text-[#c9a55a]" />
                             教育经历
                         </h3>
                         <div>
@@ -212,7 +213,7 @@ export default function AboutPage() {
                     {/* Experience Timeline */}
                     <div className="space-y-4">
                         <h3 className="text-xl font-semibold text-[var(--fg)] flex items-center gap-2">
-                            <Briefcase size={18} className="text-orange-400" />
+                            <Briefcase size={18} className="text-orange-400 dark:text-[#d4b978]" />
                             实践经历
                         </h3>
                         <div>

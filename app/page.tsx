@@ -36,7 +36,7 @@ export default function HomePage() {
                         </p>
                         <blockquote
                             className="font-quote text-2xl md:text-3xl font-medium leading-loose
-                text-slate-700 dark:text-slate-200"
+                text-slate-700 dark:text-[#e8e4de]"
                         >
                             <TypewriterQuote text={QUOTE} speed={70} />
                         </blockquote>
@@ -47,7 +47,7 @@ export default function HomePage() {
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: 1 }}
                         transition={{ delay: 0.5, duration: 0.6 }}
-                        className="w-24 h-px bg-gradient-to-r from-cyan-500 to-orange-400 rounded-full"
+                        className="w-24 h-px bg-gradient-to-r from-cyan-500 to-orange-400 dark:from-[#c9a55a] dark:to-[#e2c67e] rounded-full"
                     />
 
                     {/* Name & Title */}
@@ -62,7 +62,7 @@ export default function HomePage() {
                             <span className="text-[var(--fg)]"> Jiahao</span>
                         </h1>
                         <p className="text-base text-[var(--muted)] flex items-center justify-center gap-1.5">
-                            <MapPin size={14} className="text-cyan-500" />
+                            <MapPin size={14} className="text-cyan-500 dark:text-[#c9a55a]" />
                             西安交通大学 · 软件工程
                         </p>
                     </motion.div>
@@ -76,8 +76,8 @@ export default function HomePage() {
                     >
                         <Link href="/about"
                             className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm
-                bg-gradient-to-r from-cyan-500 to-cyan-600 text-white
-                hover:from-cyan-400 hover:to-cyan-500 transition-all shadow-lg shadow-cyan-500/25">
+                bg-gradient-to-r from-cyan-500 to-cyan-600 dark:from-[#c9a55a] dark:to-[#b8944f] text-white
+                hover:from-cyan-400 hover:to-cyan-500 dark:hover:from-[#d4b978] dark:hover:to-[#c9a55a] transition-all shadow-lg shadow-cyan-500/25 dark:shadow-[#c9a55a]/20">
                             了解我 <ArrowRight size={14} />
                         </Link>
                         <Link href="/research"
@@ -96,8 +96,8 @@ export default function HomePage() {
                     transition={{ delay: 1.8, duration: 0.5 }}
                     className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1"
                 >
-                    <div className="w-px h-12 bg-gradient-to-b from-transparent to-cyan-500/50" />
-                    <div className="w-1 h-1 rounded-full bg-cyan-500 animate-bounce" />
+                    <div className="w-px h-12 bg-gradient-to-b from-transparent to-cyan-500/50 dark:to-[#c9a55a]/40" />
+                    <div className="w-1 h-1 rounded-full bg-cyan-500 dark:bg-[#c9a55a] animate-bounce" />
                 </motion.div>
             </section>
 
@@ -113,7 +113,7 @@ export default function HomePage() {
                         className="md:col-span-3 space-y-6"
                     >
                         <div className="space-y-2">
-                            <p className="text-xs font-mono tracking-widest uppercase text-cyan-500">About Me</p>
+                            <p className="text-xs font-mono tracking-widest uppercase text-cyan-500 dark:text-[#c9a55a]">About Me</p>
                             <h2 className="text-3xl font-bold text-[var(--fg)]">个人简介</h2>
                         </div>
 
@@ -137,17 +137,17 @@ export default function HomePage() {
                         {/* Quick Links */}
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
                             {[
-                                { icon: BookOpen, label: '查看文章', href: '/articles', color: 'text-violet-400' },
-                                { icon: Code2, label: '浏览项目', href: '/projects', color: 'text-cyan-400' },
-                                { icon: ArrowRight, label: '学术研究', href: '/research', color: 'text-orange-400' },
+                                { icon: BookOpen, label: '查看文章', href: '/articles', color: 'text-violet-400 dark:text-[#d4b978]' },
+                                { icon: Code2, label: '浏览项目', href: '/projects', color: 'text-cyan-400 dark:text-[#c9a55a]' },
+                                { icon: ArrowRight, label: '学术研究', href: '/research', color: 'text-orange-400 dark:text-[#e2c67e]' },
                             ].map(({ icon: Icon, label, href, color }) => (
                                 <Link key={href} href={href}
                                     className="flex items-center gap-2.5 px-4 py-3 rounded-xl
                     border border-[var(--border)] bg-[var(--card)]
-                    hover:border-cyan-500/40 transition-all group card-hover">
+                    hover:border-cyan-500/40 dark:hover:border-[#c9a55a]/30 transition-all group card-hover">
                                     <Icon size={16} className={color} />
                                     <span className="text-sm font-medium text-[var(--fg)]">{label}</span>
-                                    <ArrowRight size={12} className="ml-auto text-[var(--muted)] group-hover:text-cyan-500 transition-colors" />
+                                    <ArrowRight size={12} className="ml-auto text-[var(--muted)] group-hover:text-cyan-500 dark:group-hover:text-[#c9a55a] group-hover:translate-x-1 transition-all" />
                                 </Link>
                             ))}
                         </div>
@@ -162,7 +162,7 @@ export default function HomePage() {
                         className="md:col-span-2 space-y-5"
                     >
                         <div className="space-y-2">
-                            <p className="text-xs font-mono tracking-widest uppercase text-orange-400">Latest</p>
+                            <p className="text-xs font-mono tracking-widest uppercase text-orange-400 dark:text-[#d4b978]">Latest</p>
                             <h2 className="text-3xl font-bold text-[var(--fg)]">动态</h2>
                         </div>
                         <NewsTimeline />

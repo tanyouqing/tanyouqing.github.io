@@ -14,7 +14,7 @@ export default function ResearchPage() {
     return (
         <div className="max-w-4xl mx-auto px-6 py-12">
             <div className="mb-10 space-y-2">
-                <p className="text-xs font-mono tracking-widest uppercase text-orange-400">Academic</p>
+                <p className="text-xs font-mono tracking-widest uppercase text-orange-400 dark:text-[#d4b978]">Academic</p>
                 <h1 className="text-4xl font-bold text-[var(--fg)]">研究</h1>
                 <p className="text-[var(--muted)]">
                     学术论文与研究工作。共 <span className="text-[var(--fg)] font-medium">{papers.length}</span> 篇/项。

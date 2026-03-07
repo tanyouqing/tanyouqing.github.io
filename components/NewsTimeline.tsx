@@ -61,7 +61,7 @@ export function NewsTimeline() {
                             </div>
                             <p className="text-sm text-[var(--fg)] leading-relaxed mt-0.5">
                                 {item.link ? (
-                                    <a href={item.link} className="hover:text-cyan-500 transition-colors">
+                                    <a href={item.link} className="hover:text-cyan-500 dark:hover:text-[#c9a55a] transition-colors">
                                         {item.content}
                                     </a>
                                 ) : (

@@ -10,15 +10,15 @@ export function Footer() {
                 </p>
                 <div className="flex items-center gap-4">
                     <Link href="https://github.com" target="_blank"
-                        className="text-[var(--muted)] hover:text-cyan-500 transition-colors" aria-label="GitHub">
+                        className="text-[var(--muted)] hover:text-cyan-500 dark:hover:text-[#c9a55a] transition-colors" aria-label="GitHub">
                         <Github size={18} />
                     </Link>
                     <Link href="mailto:caojiahao@stu.xjtu.edu.cn"
-                        className="text-[var(--muted)] hover:text-orange-400 transition-colors" aria-label="Email">
+                        className="text-[var(--muted)] hover:text-orange-400 dark:hover:text-[#d4b978] transition-colors" aria-label="Email">
                         <Mail size={18} />
                     </Link>
                     <Link href="https://scholar.google.com" target="_blank"
-                        className="text-[var(--muted)] hover:text-cyan-500 transition-colors flex items-center gap-1 text-xs">
+                        className="text-[var(--muted)] hover:text-cyan-500 dark:hover:text-[#c9a55a] transition-colors flex items-center gap-1 text-xs">
                         <ExternalLink size={14} />
                         Scholar
                     </Link>
