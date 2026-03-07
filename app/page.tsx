@@ -7,7 +7,7 @@ import { NewsTimeline } from '@/components/NewsTimeline';
 import { ArrowRight, MapPin, BookOpen, Code2 } from 'lucide-react';
 import Link from 'next/link';
 
-const QUOTE = '世间的面，不是吃一碗，少一碗;而是见一面，多一面';
+const QUOTE = '世间的面，不是吃一碗，少一碗；而是见一面，多一面';
 
 export default function HomePage() {
     return (
