@@ -2,7 +2,7 @@ import { getContentBySlug, getAllContent } from '@/lib/mdx';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Github, ExternalLink, Calendar } from 'lucide-react';
-import { marked } from 'marked';
+import { renderMarkdown } from '@/lib/render-markdown';
 
 export async function generateStaticParams() {
     const items = getAllContent('projects');
@@ -25,8 +25,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
     if (!result) notFound();
     const { meta, content } = result;
 
-    marked.setOptions({ gfm: true, breaks: false });
-    const html = marked(content) as string;
+    const html = renderMarkdown(content);
 
     return (
         <article className="max-w-3xl mx-auto px-6 py-12">

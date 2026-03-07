@@ -34,6 +34,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap"
                     rel="stylesheet"
                 />
+                <link
+                    rel="stylesheet"
+                    href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+                    crossOrigin="anonymous"
+                />
             </head>
             <body>
                 <Providers>
