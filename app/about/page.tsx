@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Github, Mail, Linkedin, ExternalLink, MapPin, GraduationCap, Briefcase } from 'lucide-react';
+import Image from 'next/image';
 
 const education = [
     {
@@ -101,11 +102,16 @@ export default function AboutPage() {
                     {/* Avatar */}
                     <div className="relative group">
                         <div className="w-44 h-44 rounded-full overflow-hidden ring-2 ring-cyan-500/30 ring-offset-2 ring-offset-[var(--bg)]
-              shadow-2xl shadow-cyan-500/20">
-                            <div className="w-full h-full bg-gradient-to-br from-cyan-500 via-slate-600 to-orange-400
-                flex items-center justify-center text-7xl select-none">
-                                🎓
-                            </div>
+              shadow-2xl shadow-cyan-500/20 relative">
+                            {/* 如果你想换回 emoji，可以取消下面注释，并把 Image 标签删掉 */}
+                            {/* <div className="w-full h-full bg-gradient-to-br from-cyan-500 via-slate-600 to-orange-400 flex items-center justify-center text-7xl select-none">🎓</div> */}
+
+                            <Image
+                                src="/avatar.jpg"
+                                alt="个人头像"
+                                fill
+                                className="object-cover"
+                            />
                         </div>
                         <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-500/20 to-orange-400/20
               opacity-0 group-hover:opacity-100 transition-opacity" />
