@@ -64,6 +64,7 @@ export function getAllContent(type: ContentType): ContentMeta[] {
 }
 
 export function getContentBySlug(type: ContentType, slug: string): { meta: ContentMeta; content: string } | null {
+    try { slug = decodeURIComponent(slug); } catch (e) { } // Handle URL-encoded Chinese filenames
     const dir = contentDir(type);
     const filePath = path.join(dir, `${slug}.md`);
     const mdxPath = path.join(dir, `${slug}.mdx`);

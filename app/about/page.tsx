@@ -6,7 +6,7 @@ import { Github, Mail, Linkedin, ExternalLink, MapPin, GraduationCap, Briefcase 
 const education = [
     {
         degree: '人工智能硕士',
-        school: '西安交通大学',
+        school: '香港中文大学（深圳）-（预计）',
         period: '2025.09 — 预计 2027.06',
         description: '即将入读，主要研究方向为强化学习。',
         icon: '🎓',
