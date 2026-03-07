@@ -13,7 +13,7 @@ interface NewsItem {
 const newsData: NewsItem[] = [
 
     {
-        date: '2025.03',
+        date: '2026.03',
         type: 'post',
         content: '开始毕业设计项目，探索文生图大模型后门攻击方向。',
     },
