@@ -14,6 +14,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="zh-CN" suppressHydrationWarning>
             <head>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            try {
+                                if (!localStorage.getItem('theme')) {
+                                    var hour = new Date().getHours();
+                                    var theme = (hour >= 8 && hour < 21) ? 'light' : 'dark';
+                                    document.documentElement.classList.add(theme);
+                                    localStorage.setItem('theme', theme);
+                                }
+                            } catch (e) {}
+                        `,
+                    }}
+                />
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 <link
