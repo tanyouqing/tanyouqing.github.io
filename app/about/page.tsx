@@ -36,6 +36,13 @@ const experience = [
         description: '作为项目经理设计并领导完成“品好饭”餐厅推荐系统，积累了推荐系统与大数据开发实践经验。',
         icon: '🛠️',
     },
+    {
+        title: 'NUS Soc Summer Workshop',
+        org: '新加坡国立大学',
+        period: '2024.06 — 2024.07',
+        description: '为期近两个月的线上&线下学习中，认识了机器学习和深度学习的经典模型，基础的金融概念和AI在金融领域的应用，并与来自世界各地的同学交流，完成了基于Vue+Flask的股票分析和预测项目实战',
+        icon: '🛠️',
+    }
 ];
 
 const skills = {
