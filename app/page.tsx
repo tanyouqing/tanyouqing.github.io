@@ -7,7 +7,7 @@ import { NewsTimeline } from '@/components/NewsTimeline';
 import { ArrowRight, MapPin, BookOpen, Code2 } from 'lucide-react';
 import Link from 'next/link';
 
-const QUOTE = '人世间的面，不是吃一碗，少一碗，而是见一面，多一面。';
+const QUOTE = '人世间的面，不是吃一碗，少一碗，而是见一面，多一面';
 
 export default function HomePage() {
     return (
@@ -118,7 +118,7 @@ export default function HomePage() {
                         </div>
 
                         <p className="text-[var(--muted)] leading-8 text-base">
-                            你好！我是曹嘉豪，来自<span className="text-[var(--fg)] font-medium">西安交通大学</span>，
+                            你好！我是曹家豪，来自<span className="text-[var(--fg)] font-medium">西安交通大学</span>，
                             主修<span className="text-[var(--fg)] font-medium">软件工程</span>专业。
                             即将踏上硕士研究生的学习旅程，对前沿软件技术和系统设计充满热情。
                         </p>

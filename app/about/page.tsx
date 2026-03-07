@@ -5,17 +5,17 @@ import { Github, Mail, Linkedin, ExternalLink, MapPin, GraduationCap, Briefcase 
 
 const education = [
     {
-        degree: '软件工程硕士',
+        degree: '人工智能硕士',
         school: '西安交通大学',
-        period: '2025.09 — 预计 2028.06',
-        description: '即将入读，主要研究方向待定。',
+        period: '2025.09 — 预计 2027.06',
+        description: '即将入读，主要研究方向为强化学习。',
         icon: '🎓',
     },
     {
         degree: '软件工程学士',
         school: '西安交通大学',
         period: '2021.09 — 2025.06',
-        description: '主修软件工程，系统学习软件开发、数据结构、算法设计、数据库原理等核心课程。',
+        description: '主修软件工程，系统学习软件开发、数据结构与算法设计、计算机视觉等核心课程。',
         icon: '📚',
     },
 ];
@@ -29,23 +29,23 @@ const experience = [
         icon: '🔬',
     },
     {
-        title: '学术项目参与',
-        org: '西安交通大学',
-        period: '2024.03 — 2024.09',
-        description: '参与实验室科研项目，积累了软件工程与系统设计实践经验。',
+        title: '大数据项目实习',
+        org: '成都上程大数据有限公司',
+        period: '2025.02 — 2025.03',
+        description: '作为项目经理设计并领导完成“品好饭”餐厅推荐系统，积累了推荐系统与大数据开发实践经验。',
         icon: '🛠️',
     },
 ];
 
 const skills = {
-    '编程语言': ['Python', 'TypeScript', 'Java', 'Go', 'C/C++'],
-    '框架与库': ['React', 'Next.js', 'Spring Boot', 'FastAPI'],
-    '工具与平台': ['Git', 'Docker', 'Linux', 'PostgreSQL', 'Redis'],
-    '研究方向': ['软件工程', '系统设计', '分布式系统'],
+    '编程语言': ['Python', 'Java', 'Go', 'C/C++'],
+    '框架与库': ['PyTorch', 'React', 'Next.js', 'Spring Boot', 'Flask'],
+    '工具与平台': ['Git', 'Linux', 'MySQL'],
+    '研究方向': ['软件工程', '后门攻击', '强化学习'],
 };
 
 const socialLinks = [
-    { icon: Github, label: 'GitHub', href: 'https://github.com', color: 'hover:text-slate-200' },
+    { icon: Github, label: 'GitHub', href: 'https://github.com/tanyouqing', color: 'hover:text-slate-200' },
     { icon: Mail, label: 'Email', href: 'mailto:caojiahao@stu.xjtu.edu.cn', color: 'hover:text-orange-400' },
     { icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com', color: 'hover:text-blue-400' },
     { icon: ExternalLink, label: 'Scholar', href: 'https://scholar.google.com', color: 'hover:text-cyan-400' },
@@ -114,7 +114,7 @@ export default function AboutPage() {
                     {/* Name & Position */}
                     <div className="text-center space-y-1">
                         <h2 className="text-xl font-bold text-[var(--fg)]">
-                            <span className="gradient-text">Cao</span> Jiahao · 曹嘉豪
+                            <span className="gradient-text">Cao</span> Jiahao · 曹家豪
                         </h2>
                         <p className="text-sm text-[var(--muted)] flex items-center justify-center gap-1">
                             <GraduationCap size={13} className="text-cyan-500" />
@@ -167,7 +167,7 @@ export default function AboutPage() {
                         <h3 className="text-xl font-semibold text-[var(--fg)]">个人简介</h3>
                         <div className="space-y-3 text-[var(--muted)] leading-8">
                             <p>
-                                你好！我是<strong className="text-[var(--fg)]">曹嘉豪</strong>，来自
+                                你好！我是<strong className="text-[var(--fg)]">曹家豪</strong>，来自
                                 <strong className="text-[var(--fg)]">西安交通大学</strong>，主修
                                 <strong className="text-[var(--fg)]">软件工程</strong>专业。目前即将开始硕士阶段的学习旅程，
                                 对软件系统设计、人工智能应用与前沿开发技术充满热情。
