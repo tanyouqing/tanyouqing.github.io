@@ -18,12 +18,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     dangerouslySetInnerHTML={{
                         __html: `
                             try {
-                                if (!localStorage.getItem('theme')) {
-                                    var hour = new Date().getHours();
-                                    var theme = (hour >= 8 && hour < 21) ? 'light' : 'dark';
-                                    document.documentElement.classList.add(theme);
-                                    localStorage.setItem('theme', theme);
-                                }
+                                var hour = new Date().getHours();
+                                var theme = (hour >= 8 && hour < 21) ? 'light' : 'dark';
+                                document.documentElement.className = document.documentElement.className.replace(/\b(light|dark)\b/g, '');
+                                document.documentElement.classList.add(theme);
+                                localStorage.setItem('theme', theme);
                             } catch (e) {}
                         `,
                     }}
