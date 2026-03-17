@@ -24,12 +24,13 @@ export function renderMarkdown(source: string): string {
         }
     );
 
-    // 2. Protect & render inline math  $ ... $  (but NOT $$)
+    // 2. Protect & render inline math  $ ... $  (but NOT $$). Matches across newlines.
     html = html.replace(
-        /(?<!\$)\$(?!\$)(.+?)(?<!\$)\$(?!\$)/g,
+        /(?<!\$)\$(?!\$)([\s\S]+?)(?<!\$)\$(?!\$)/g,
         (_, tex) => {
             try {
-                return katex.renderToString(tex.trim(), { displayMode: false, throwOnError: false });
+                const isDisplay = tex.includes('\n');
+                return katex.renderToString(tex.trim(), { displayMode: isDisplay, throwOnError: false });
             } catch {
                 return `<code>${tex.trim()}</code>`;
             }
