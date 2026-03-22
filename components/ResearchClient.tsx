@@ -105,7 +105,7 @@ export function ResearchClient({ papers, tags }: ResearchClientProps) {
                             className="py-5 border-b border-[var(--border)] last:border-0 space-y-2"
                         >
                             {/* Title */}
-                            <Link href={`/research/${paper.slug}`}>
+                            <Link href={`/research/${encodeURIComponent(paper.slug)}`}>
                                 <h2 className="text-base font-semibold text-[var(--fg)] leading-snug hover:text-orange-400 dark:hover:text-[#d4b978] transition-colors cursor-pointer">
                                     {paper.title}
                                 </h2>

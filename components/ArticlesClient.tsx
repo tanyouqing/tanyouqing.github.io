@@ -57,7 +57,7 @@ export function ArticlesClient({ articles, tags }: ArticlesClientProps) {
                             transition={{ delay: i * 0.06 }}
                             className="py-6 group"
                         >
-                            <Link href={`/articles/${article.slug}`} className="block space-y-2">
+                            <Link href={`/articles/${encodeURIComponent(article.slug)}`} className="block space-y-2">
                                 <div className="flex items-start justify-between gap-4">
                                     <h2 className="text-lg font-semibold text-[var(--fg)] group-hover:text-cyan-500 dark:group-hover:text-[#c9a55a] transition-colors leading-snug">
                                         {article.title}
