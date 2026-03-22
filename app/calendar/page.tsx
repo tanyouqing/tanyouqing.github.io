@@ -81,30 +81,30 @@ export default function CalendarPage() {
                 {/* ── Section 1: Recent Schedule ── */}
                 <section>
                     <h2 className="text-xl font-semibold text-[var(--fg)] mb-6 flex items-center gap-2">
-                        <Clock size={20} className="text-orange-400 dark:text-[#8a7340]"/>
+                        <Clock size={20} className="text-orange-400 dark:text-[#8a7340]" />
                         近期日程
                     </h2>
-                    
+
                     <div className="grid md:grid-cols-2 gap-6">
                         {/* Completed Tasks */}
                         <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm">
                             <h3 className="text-[var(--fg)] font-medium text-lg flex items-center gap-2 mb-4 border-b border-[var(--border)] pb-3">
-                                <CheckCircle2 size={18} className="text-green-500"/>
+                                <CheckCircle2 size={18} className="text-green-500" />
                                 近期完成任务
                             </h3>
                             <ul className="space-y-4">
                                 <li className="flex items-start gap-3 text-[var(--muted)]">
-                                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-green-500 shrink-0"/>
+                                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-green-500 shrink-0" />
                                     <div>
-                                        <p className="text-[var(--fg)] font-medium text-sm">部署个人主页与暗色主题</p>
-                                        <p className="text-xs opacity-75 mt-0.5">完成博客文章渲染及导航栏搭建适配</p>
+                                        <p className="text-[var(--fg)] font-medium text-sm">部署小龙虾</p>
+                                        <p className="text-xs opacity-75 mt-0.5">租云服务器并部署OpenClaw+OpenViking服务</p>
                                     </div>
                                 </li>
                                 <li className="flex items-start gap-3 text-[var(--muted)]">
-                                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-green-500 shrink-0"/>
+                                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-green-500 shrink-0" />
                                     <div>
-                                        <p className="text-[var(--fg)] font-medium text-sm">后门攻击论文内容撰写</p>
-                                        <p className="text-xs opacity-75 mt-0.5">完成扩散模型攻击框架的第一版实验跑通</p>
+                                        <p className="text-[var(--fg)] font-medium text-sm">后门攻击实验</p>
+                                        <p className="text-xs opacity-75 mt-0.5">分别复现攻击CLIP和U-Net组件的两篇论文</p>
                                     </div>
                                 </li>
                             </ul>
@@ -113,22 +113,27 @@ export default function CalendarPage() {
                         {/* Planned Tasks */}
                         <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm">
                             <h3 className="text-[var(--fg)] font-medium text-lg flex items-center gap-2 mb-4 border-b border-[var(--border)] pb-3">
-                                <CircleDashed size={18} className="text-orange-400 dark:text-[#c9a55a]"/>
+                                <CircleDashed size={18} className="text-orange-400 dark:text-[#c9a55a]" />
                                 计划完成任务
                             </h3>
                             <ul className="space-y-4">
                                 <li className="flex items-start gap-3 text-[var(--muted)]">
-                                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-orange-400 dark:bg-[#c9a55a] shrink-0"/>
+                                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-orange-400 dark:bg-[#c9a55a] shrink-0" />
                                     <div>
-                                        <p className="text-[var(--fg)] font-medium text-sm">强化学习 PPO 算法复现</p>
-                                        <p className="text-xs opacity-75 mt-0.5">预计在下周三前跑通 Atari 游戏环境测试</p>
+                                        <p className="text-[var(--fg)] font-medium text-sm">强化学习的数学原理学习</p>
                                     </div>
                                 </li>
                                 <li className="flex items-start gap-3 text-[var(--muted)]">
-                                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-orange-400 dark:bg-[#c9a55a] shrink-0"/>
+                                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-orange-400 dark:bg-[#c9a55a] shrink-0" />
                                     <div>
-                                        <p className="text-[var(--fg)] font-medium text-sm">完善项目 Showcase 页面</p>
-                                        <p className="text-xs opacity-75 mt-0.5">将之前的 Web 练习项目打包并加入图文展示</p>
+                                        <p className="text-[var(--fg)] font-medium text-sm">雅思备考</p>
+                                    </div>
+                                </li>
+                                <li className="flex items-start gap-3 text-[var(--muted)]">
+                                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-orange-400 dark:bg-[#c9a55a] shrink-0" />
+                                    <div>
+                                        <p className="text-[var(--fg)] font-medium text-sm">完善毕设实验</p>
+                                        <p className="text-xs opacity-75 mt-0.5">融合CLIP和U-Net的后门攻击实验，并探索防御策略</p>
                                     </div>
                                 </li>
                             </ul>
@@ -139,10 +144,10 @@ export default function CalendarPage() {
                 {/* ── Section 2: Upload History (GitHub Contribution Graph) ── */}
                 <section>
                     <h2 className="text-xl font-semibold text-[var(--fg)] mb-6 flex items-center gap-2">
-                        <CheckCircle2 size={20} className="text-cyan-500 dark:text-[#d4b978]"/>
+                        <CheckCircle2 size={20} className="text-cyan-500 dark:text-[#d4b978]" />
                         近三个月上传记录
                     </h2>
-                    
+
                     <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 md:p-8 shadow-sm flex flex-col">
                         <div className="flex justify-end gap-2 mb-8 text-xs text-[var(--muted)] items-center">
                             <span>少</span>
@@ -152,20 +157,20 @@ export default function CalendarPage() {
                             <div className="w-4 h-4 rounded-[4px] bg-emerald-500 dark:bg-emerald-600" />
                             <span>多</span>
                         </div>
-                        
+
                         {/* 3 Months layout */}
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full">
                             {monthsData.map((month, mIdx) => (
                                 <div key={mIdx} className="w-full flex flex-col items-center">
                                     <h3 className="text-[var(--fg)] font-medium mb-4 tracking-wider">{month.title}</h3>
-                                    
+
                                     {/* Weekday headers aligned on top */}
                                     <div className="grid grid-cols-7 gap-1.5 md:gap-2 mb-2 w-full max-w-[280px]">
                                         {['日', '一', '二', '三', '四', '五', '六'].map(dayName => (
                                             <div key={dayName} className="text-center text-[0.7rem] text-[var(--muted)]">{dayName}</div>
                                         ))}
                                     </div>
-                                    
+
                                     {/* Month cells grid */}
                                     <div className="grid grid-cols-7 gap-1.5 md:gap-2 w-full max-w-[280px]">
                                         {month.cells.map((cell, cIdx) => {
@@ -174,17 +179,17 @@ export default function CalendarPage() {
                                             }
 
                                             // Exclude future days from highlighting
-                                            let bgClass = "bg-slate-200 dark:bg-[#2a2825]"; 
+                                            let bgClass = "bg-slate-200 dark:bg-[#2a2825]";
                                             const count = cell.items?.length || 0;
-                                            
+
                                             if (!cell.isFuture && count > 0) {
                                                 if (count === 1) bgClass = "bg-emerald-400 dark:bg-emerald-800 shadow-sm";
                                                 if (count >= 2) bgClass = "bg-emerald-500 dark:bg-emerald-600 shadow-[0_0_10px_rgba(16,185,129,0.4)]";
                                             }
 
                                             return (
-                                                <div 
-                                                    key={cIdx} 
+                                                <div
+                                                    key={cIdx}
                                                     className={`group relative w-full aspect-square rounded-[4px] cursor-help transition-colors hover:ring-2 hover:ring-emerald-400/50 hover:ring-offset-1 dark:hover:ring-offset-[#1a1917] ${bgClass}`}
                                                 >
                                                     {/* Custom Tooltip */}

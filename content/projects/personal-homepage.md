@@ -1,6 +1,6 @@
 ---
 title: "个人学术主页"
-date: "2025-03-07"
+date: "2026-03-07"
 description: "基于 Next.js 14 + Tailwind CSS 构建的个人学术主页，支持 MDX 内容管理、暗黑模式与响应式布局。"
 tags: ["Next.js", "Web开发", "个人项目"]
 tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"]
