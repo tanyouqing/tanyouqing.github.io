@@ -8,7 +8,11 @@ import { TableOfContents } from '@/components/TableOfContents';
 
 export async function generateStaticParams() {
     const items = getAllContent('research');
-    return items.map(item => ({ slug: encodeURIComponent(item.slug) }));
+    // Next.js dev server has a bug with Unicode params in static export mode. 
+    // We encode during development to fix local 500s, but use native strings for production github pages build.
+    return items.map(item => ({ 
+        slug: process.env.NODE_ENV === 'development' ? encodeURIComponent(item.slug) : item.slug 
+    }));
 }
 
 export default function ResearchDetailPage({ params }: { params: { slug: string } }) {

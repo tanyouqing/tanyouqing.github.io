@@ -80,7 +80,7 @@ export function ProjectsClient({ projects, tags }: ProjectsClientProps) {
                             transition={{ delay: i * 0.07 }}
                             className="group flex flex-col rounded-2xl border border-[var(--border)] bg-[var(--card)]
                 overflow-hidden card-hover cursor-pointer"
-                            onClick={() => router.push(`/projects/${encodeURIComponent(project.slug)}`)}
+                            onClick={() => router.push(`/projects/${project.slug}`)}
                         >
                             {/* Gradient Header */}
                             <div className="h-32 bg-gradient-to-br from-cyan-500/20 via-transparent to-orange-400/10
