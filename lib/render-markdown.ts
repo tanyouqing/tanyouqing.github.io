@@ -31,7 +31,7 @@ export function renderMarkdown(source: string): string {
         /\$\$([\s\S]+?)\$\$/g,
         (_, tex) => {
             try {
-                return katex.renderToString(tex.trim(), { displayMode: true, throwOnError: false });
+                return katex.renderToString(tex.trim(), { displayMode: true, throwOnError: false, strict: false });
             } catch {
                 return `<code>${tex.trim()}</code>`;
             }
@@ -44,7 +44,7 @@ export function renderMarkdown(source: string): string {
         (_, tex) => {
             try {
                 const isDisplay = tex.includes('\n');
-                return katex.renderToString(tex.trim(), { displayMode: isDisplay, throwOnError: false });
+                return katex.renderToString(tex.trim(), { displayMode: isDisplay, throwOnError: false, strict: false });
             } catch {
                 return `<code>${tex.trim()}</code>`;
             }
