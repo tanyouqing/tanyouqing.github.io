@@ -18,6 +18,8 @@ export default function CalendarPage() {
     const today = new Date();
     const currentYear = today.getFullYear();
     const currentMonth = today.getMonth();
+    // Use string comparison for isFuture to avoid time-of-day and timezone issues
+    const todayStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
 
     const monthsData: {
         title: string;
@@ -43,16 +45,15 @@ export default function CalendarPage() {
             cells.push({ empty: true });
         }
 
-        // Generate actual days
+        // Generate actual days — compare date strings so today itself is NOT isFuture
         for (let d = 1; d <= daysInMonth; d++) {
             const dateStr = `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
             const itemsForDay = allItems.filter(item => item.date === dateStr);
-            const cellDate = new Date(y, m, d);
             cells.push({
                 empty: false,
                 dateStr,
                 items: itemsForDay,
-                isFuture: cellDate > today
+                isFuture: dateStr > todayStr   // pure string compare: '2026-03-31' > '2026-03-30'
             });
         }
 
@@ -103,8 +104,8 @@ export default function CalendarPage() {
                                 <li className="flex items-start gap-3 text-[var(--muted)]">
                                     <div className="mt-1 w-1.5 h-1.5 rounded-full bg-green-500 shrink-0" />
                                     <div>
-                                        <p className="text-[var(--fg)] font-medium text-sm">后门攻击实验</p>
-                                        <p className="text-xs opacity-75 mt-0.5">分别复现攻击CLIP和U-Net组件的两篇论文</p>
+                                        <p className="text-[var(--fg)] font-medium text-sm">强化学习的数学原理学习和笔记记录</p>
+                                        <p className="text-xs opacity-75 mt-0.5">学习赵世钰老师《强化学习的数学原理》课程</p>
                                     </div>
                                 </li>
                             </ul>
@@ -117,16 +118,18 @@ export default function CalendarPage() {
                                 计划完成任务
                             </h3>
                             <ul className="space-y-4">
+
                                 <li className="flex items-start gap-3 text-[var(--muted)]">
                                     <div className="mt-1 w-1.5 h-1.5 rounded-full bg-orange-400 dark:bg-[#c9a55a] shrink-0" />
                                     <div>
-                                        <p className="text-[var(--fg)] font-medium text-sm">强化学习的数学原理学习</p>
+                                        <p className="text-[var(--fg)] font-medium text-sm">雅思备考</p>
                                     </div>
                                 </li>
                                 <li className="flex items-start gap-3 text-[var(--muted)]">
                                     <div className="mt-1 w-1.5 h-1.5 rounded-full bg-orange-400 dark:bg-[#c9a55a] shrink-0" />
                                     <div>
-                                        <p className="text-[var(--fg)] font-medium text-sm">雅思备考</p>
+                                        <p className="text-[var(--fg)] font-medium text-sm">Openviking项目学习</p>
+                                        <p className="text-xs opacity-75 mt-0.5">学习Openviking记忆系统实现并探索改进方向</p>
                                     </div>
                                 </li>
                                 <li className="flex items-start gap-3 text-[var(--muted)]">

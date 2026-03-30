@@ -26,6 +26,23 @@ export type ContentType = 'articles' | 'projects' | 'research';
 const contentDir = (type: ContentType) =>
     path.join(process.cwd(), 'content', type);
 
+/**
+ * gray-matter parses unquoted YAML dates (e.g. `date: 2026-03-29`) as JavaScript
+ * Date objects. This helper always returns a 'YYYY-MM-DD' string so that
+ * comparisons like `item.date === dateStr` in the Calendar page work correctly.
+ */
+function parseDateString(raw: unknown): string {
+    if (!raw) return '';
+    if (raw instanceof Date) {
+        // Use UTC values to avoid timezone shifts (the Date is midnight UTC)
+        const y = raw.getUTCFullYear();
+        const m = String(raw.getUTCMonth() + 1).padStart(2, '0');
+        const d = String(raw.getUTCDate()).padStart(2, '0');
+        return `${y}-${m}-${d}`;
+    }
+    return String(raw);
+}
+
 export function getAllContent(type: ContentType): ContentMeta[] {
     const dir = contentDir(type);
     if (!fs.existsSync(dir)) return [];
@@ -45,7 +62,7 @@ export function getAllContent(type: ContentType): ContentMeta[] {
         return {
             slug,
             title: data.title ?? slug,
-            date: data.date ?? '',
+            date: parseDateString(data.date),
             description: data.description ?? '',
             tags: data.tags ?? [],
             category: data.category,
@@ -79,7 +96,7 @@ export function getContentBySlug(type: ContentType, slug: string): { meta: Conte
         meta: {
             slug,
             title: data.title ?? slug,
-            date: data.date ?? '',
+            date: parseDateString(data.date),
             description: data.description ?? '',
             tags: data.tags ?? [],
             category: data.category,
