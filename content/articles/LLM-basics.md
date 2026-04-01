@@ -1,6 +1,6 @@
 ---
 title: "大语言模型基础与 Transformer 深度解析"
-date: "2025-03-31"
+date: "2026-03-31"
 description: "本文梳理基础的LLM概念，并对Transformer模型做详细介绍"
 tags: ["LLM", "Transformer","笔记"]
 category: "学习"
