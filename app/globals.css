@@ -255,6 +255,19 @@ body {
   border-color: #c9a55a;
 }
 
+.mdx-content img {
+  @apply rounded-xl shadow-md my-4 max-w-full mx-auto block;
+  border: 1px solid var(--border);
+}
+
+.mdx-content figure {
+  @apply my-8 text-center;
+}
+
+.mdx-content figcaption {
+  @apply mt-2 text-sm text-[var(--muted)] italic;
+}
+
 /* ── Table of Contents Sidebar ── */
 .toc-sidebar {
   position: sticky;
