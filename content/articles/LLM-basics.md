@@ -24,8 +24,7 @@ category: "学习"
 
 2017 年提出的 Transformer 彻底抛弃了 RNN 的循环结构，完全依赖注意力机制，实现了真正意义上的大规模并行计算，这也是现代大语言模型的绝对基石。
 
-
-
+![Transformer architecture](/articles/transformer-architecture.png)
 ### 2.1 整体架构总览
 从宏观上看，Transformer 是一个高度并行的矩阵计算流水线，主要由三大核心模块组成：
 * **Encoder（编码器）**：负责接收输入文本并将其表征为富含上下文信息的向量（包含重复堆叠的 $N$ 层）。
