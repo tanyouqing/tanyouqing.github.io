@@ -8,15 +8,15 @@ const education = [
     {
         degree: '人工智能硕士',
         school: '香港中文大学（深圳）-（预计）',
-        period: '2025.09 — 预计 2027.06',
-        description: '即将入读，主要研究方向为强化学习。',
+        period: '2026.09 — 预计 2028.06',
+        description: '即将入读，主要研究方向为智能体与强化学习。',
         icon: '🎓',
     },
     {
         degree: '软件工程学士',
         school: '西安交通大学',
-        period: '2021.09 — 2025.06',
-        description: '主修软件工程，系统学习软件开发、数据结构与算法设计、计算机视觉等核心课程。',
+        period: '2022.09 — 2026.06',
+        description: '主修软件工程，毕业设计为扩散模型的后门攻击。',
         icon: '📚',
     },
 ];
@@ -25,31 +25,31 @@ const experience = [
     {
         title: '本科毕业设计',
         org: '西安交通大学',
-        period: '2024.09 — 2025.06',
-        description: '独立完成毕业设计项目，探索前沿技术方向，解决实际工程问题。',
+        period: '2025.09 — 2026.06',
+        description: '完成毕业设计项目，学习扩散模型与后门攻击原理，探索防御方法。',
         icon: '🔬',
     },
     {
         title: '大数据项目实习',
         org: '成都上程大数据有限公司',
         period: '2025.02 — 2025.03',
-        description: '作为项目经理设计并领导完成“品好饭”餐厅推荐系统，积累了推荐系统与大数据开发实践经验。',
+        description: '作为项目经理设计并实现“品好饭”餐厅推荐系统，积累了推荐系统与大数据开发实践经验。',
         icon: '🛠️',
     },
     {
         title: 'NUS Soc Summer Workshop',
         org: '新加坡国立大学',
         period: '2024.06 — 2024.07',
-        description: '为期近两个月的线上&线下学习中，认识了机器学习和深度学习的经典模型，基础的金融概念和AI在金融领域的应用，并与来自世界各地的同学交流，完成了基于Vue+Flask的股票分析和预测项目实战',
+        description: '学习机器学习和深度学习的经典模型、基础的金融概念和AI在金融领域的应用，并与小组合作，完成了基于Vue+Flask的股票分析和预测项目实战',
         icon: '🛠️',
     }
 ];
 
 const skills = {
     '编程语言': ['Python', 'Java', 'Go', 'C/C++'],
-    '框架与库': ['PyTorch', 'React', 'Next.js', 'Spring Boot', 'Flask'],
+    '框架与库': ['PyTorch', 'Langgraph', 'Next.js', 'Spring Boot', 'Flask'],
     '工具与平台': ['Git', 'Linux', 'MySQL'],
-    '研究方向': ['软件工程', '后门攻击', '强化学习'],
+    '研究方向': ['智能体', '后门攻击', '强化学习'],
 };
 
 const socialLinks = [
