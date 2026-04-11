@@ -2,12 +2,12 @@
 title: "青律 YouthLex"
 date: "2026-04-11"
 description: "面向高校场景的双模块法律智能体系统，覆盖学生维权辅助与对抗式辩论陪练。"
-tags: ["AI Agent", "法律科技", "高校场景"]
+tags: ["Agent", "法律科技"]
 tech: ["Python", "LangGraph", "Next", "TypeScript", "RAG"]
+github: "https://github.com/tanyouqing/YouthLex"""
 demo: "http://118.31.125.31/"
 image: "⚖️"
 ---
-
 ## 项目介绍
 
 青律（YouthLex）是一个面向高校场景的双模块法律智能体系统，聚焦两个真实且高频的问题：一类是普通大学生在遇到租房、兼职、消费、借贷等纠纷后，不知道如何梳理事实、保留证据并启动维权；另一类是法学生以及更广泛的大学生群体，在现实法律场景中缺少高质量、强对抗的辩论训练环境。
