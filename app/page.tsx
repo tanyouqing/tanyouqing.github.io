@@ -123,7 +123,7 @@ export default function HomePage() {
                             即将踏上硕士研究生的学习旅程，对前沿人工智能技术和软件系统设计充满热情。
                         </p>
                         <p className="text-[var(--muted)] leading-8 text-base">
-                            我热爱以代码构建优雅的解决方案，对强化学习、人工智能应用及软件工程方法论有浓厚兴趣。
+                            我热爱用代码解决实际问题，对强化学习、智能体及软件工程方法论有浓厚兴趣，希望持续有vibe coding idea产出。
                             这里记录我的学习思考、项目探索和研究成果。
                         </p>
 
