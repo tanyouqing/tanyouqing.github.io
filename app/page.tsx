@@ -129,7 +129,7 @@ export default function HomePage() {
 
                         {/* Tags */}
                         <div className="flex flex-wrap gap-2 pt-2">
-                            {['软件工程', '后门攻击', '人工智能', 'Full Stack', 'Research', '西安交通大学'].map(tag => (
+                            {['智能体', '后门攻击', '大语言模型', '强化学习'].map(tag => (
                                 <span key={tag} className="tag-badge">{tag}</span>
                             ))}
                         </div>
