@@ -132,11 +132,11 @@ export default function AboutPage() {
                         </h2>
                         <p className="text-sm text-[var(--muted)] flex items-center justify-center gap-1">
                             <GraduationCap size={13} className="text-cyan-500 dark:text-[#c9a55a]" />
-                            软件工程 硕士研究生（准）
+                            Software Engineering Bachelor
                         </p>
                         <p className="text-sm text-[var(--muted)] flex items-center justify-center gap-1">
                             <MapPin size={13} className="text-orange-400 dark:text-[#d4b978]" />
-                            西安交通大学
+                            Xi'an Jiaotong University
                         </p>
                     </div>
 
