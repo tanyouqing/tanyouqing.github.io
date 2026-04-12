@@ -15,17 +15,12 @@ const newsData: NewsItem[] = [
     {
         date: '2026.03',
         type: 'post',
-        content: '开始毕业设计项目，探索文生图大模型后门攻击方向。',
+        content: '开始毕业设计项目，方向为扩散模型后门攻击',
     },
     {
         date: '2025.03',
         type: 'event',
-        content: '参与成都上程大数据公司实习，担任项目经理。',
-    },
-    {
-        date: '2024.7',
-        type: 'award',
-        content: '参与NUS Soc项目，学习并实践AI for finance，获得评级A',
+        content: '参与成都上程大数据公司实习，方向为大数据算法与推荐系统',
     },
 ];
 
