@@ -2,10 +2,9 @@
 title: "大语言模型基础与 Transformer 深度解析"
 date: "2026-03-31"
 description: "本文梳理基础的LLM概念，并对Transformer模型做详细介绍"
-tags: ["LLM","笔记"]
-category: "学习"
+tags: ["LLM"]
+category: "笔记"
 ---
-
 # 大语言模型基础与 Transformer 深度解析
 
 现代智能体的强大能力，建立在语言模型从简单的概率统计到复杂的深度神经网络的演进之上。这份笔记将带你从语言模型的本源出发，深度拆解具有颠覆性的 Transformer 架构，并纵览大模型时代的应用与底层规律。
@@ -30,47 +29,69 @@ category: "学习"
 </figure>
 
 ### 2.1 整体架构总览
+
 从宏观上看，Transformer 是一个高度并行的矩阵计算流水线，主要由三大核心模块组成：
+
 * **Encoder（编码器）**：负责接收输入文本并将其表征为富含上下文信息的向量（包含重复堆叠的 $N$ 层）。
 * **Decoder（解码器）**：输入为已生成的序列（向右平移），负责结合编码器的信息逐步生成目标输出（同样包含重复堆叠的 $N$ 层）。
 * **输出层**：由 Linear（线性层）和 Softmax 函数构成，用于将解码器的输出转化为最终的词汇概率分布。
 
 ### 2.2 输入表示 (Input Representation)
+
 在进入复杂的神经网络之前，必须将文本转化为数学形式：
+
 * **Embedding（词嵌入）**：将离散的 Token 转化为连续的向量表示，即 $X \in \mathbb{R}^{n \times d_{\text{model}}}$。
 * **Positional Encoding（位置编码）**：由于模型舍弃了顺序处理机制，必须通过特定的正弦/余弦函数生成位置向量，并直接与嵌入向量相加 ($X=X+PE$)，以此来引入序列的顺序信息。
 
 ### 2.3 核心：注意力机制 (Attention Mechanism)
 
-
-
 注意力机制的本质是：**让序列中的每个 Token 都能由所有 Token 的加权平均来表示**。
 
 * **矩阵计算流程**：
-    首先，输入矩阵 $X$ 分别乘以不同的权重矩阵，生成查询向量 $Q$、键向量 $K$ 和值向量 $V$：
-    $$Q=X W_Q$$
-    $$K=X W_K$$
-    $$V=X W_V$$
-    随后代入核心的 Attention 公式：
-    $$\text{Attention}(Q,K,V)=\text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
-    具体步骤包含：计算相关性 ($QK^T$) $\rightarrow$ 缩放 ($/\sqrt{d_k}$) $\rightarrow$ 每一行 Softmax 归一化 $\rightarrow$ 加权求和 ($Z=\text{softmax}(\cdots) V$)。
+  首先，输入矩阵 $X$ 分别乘以不同的权重矩阵，生成查询向量 $Q$、键向量 $K$ 和值向量 $V$：
+
+  $$
+  X W_Q
+  $$
+
+  $$
+  X W_K
+  $$
+
+  $$
+  X W_V
+  $$
+
+  随后代入核心的 Attention 公式：
+  $$
+  ext{Attention}(Q,K,V)=\text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+  $$
+
+  具体步骤包含：计算相关性 ($QK^T$) $\rightarrow$ 缩放 ($/\sqrt{d_k}$) $\rightarrow$ 每一行 Softmax 归一化 $\rightarrow$ 加权求和 ($Z=\text{softmax}(\cdots) V$)。
 * **为什么要除以 $\sqrt{d_k}$ 进行缩放？**
-    $Q \cdot K$ 的方差会随着维度 $d_k$ 的增大而变大。如果不进行缩放，数值过大会导致 Softmax 函数进入饱和区，从而引发梯度消失。缩放后可以使得分布的标準差回到 1，保证训练的稳定。
+  $Q \cdot K$ 的方差会随着维度 $d_k$ 的增大而变大。如果不进行缩放，数值过大会导致 Softmax 函数进入饱和区，从而引发梯度消失。缩放后可以使得分布的标準差回到 1，保证训练的稳定。
 * **多头注意力 (Multi-Head)**：
-    单头只有一个观察视角，而多头相当于多个“专家”同时关注不同关系。在数学上它是多个 Attention 函数的组合，通过子空间分解提升表示的秩。最后将各个头的结果拼接 ($Z = \text{Concat}(Z_1,...,Z_h)$) 并乘以输出权重 $W_O$。
+  单头只有一个观察视角，而多头相当于多个“专家”同时关注不同关系。在数学上它是多个 Attention 函数的组合，通过子空间分解提升表示的秩。最后将各个头的结果拼接 ($Z = \text{Concat}(Z_1,...,Z_h)$) 并乘以输出权重 $W_O$。
 * **Decoder 特有的注意力机制**：
-    * **Masked Attention（掩码注意力）**：将未来位置的相关性分数设为 $-\infty$，防止模型“偷看”到未来的信息，保证自回归生成的合理性。
-    * **Cross Attention（交叉注意力）**：查询向量 $Q$ 来自 Decoder，而键向量 $K$ 和值向量 $V$ 来自 Encoder，作用是结合原始输入信息生成输出。
+
+  * **Masked Attention（掩码注意力）**：将未来位置的相关性分数设为 $-\infty$，防止模型“偷看”到未来的信息，保证自回归生成的合理性。
+  * **Cross Attention（交叉注意力）**：查询向量 $Q$ 来自 Decoder，而键向量 $K$ 和值向量 $V$ 来自 Encoder，作用是结合原始输入信息生成输出。
 
 ### 2.4 残差连接与层归一化 (Add & Norm)
+
 * **残差连接**：$Y = X + F(X)$，允许梯度绕过非线性层直接反向传播，缓解深层网络梯度消失问题。
 * **层归一化**：$Y = \text{LayerNorm}(Y)$，稳定每一层特征的分布，加速训练过程。
 
 ### 2.5 前馈神经网络 (Feed Forward)
-$$\text{FFN}(x)=\max(0, xW_1+b_1)W_2 + b_2$$
+
+$$
+\text{FFN}(x)=\max(0, xW_1+b_1)W_2 + b_2
+$$
+
 注意力层负责动态“聚合信息”，而 FFN 则是对每个位置独立加工，通过两次线性变换和 ReLU 激活增加非线性表达能力。
 
 ### 2.6 数据流向全景解析
+
 * **Encoder 流向**：Input $\rightarrow$ Embedding + Pos $\rightarrow$ Attention $\rightarrow$ Add&Norm $\rightarrow$ FFN $\rightarrow$ Add&Norm $\rightarrow$ 输出上下文矩阵。
 * **Decoder 流向**：Output $\rightarrow$ Embedding + Pos $\rightarrow$ Masked Attention $\rightarrow$ Add&Norm $\rightarrow$ Cross Attention $\rightarrow$ Add&Norm $\rightarrow$ FFN $\rightarrow$ Add&Norm $\rightarrow$ 输出概率分布。
 
@@ -79,6 +100,7 @@ $$\text{FFN}(x)=\max(0, xW_1+b_1)W_2 + b_2$$
 ## 三、 走向主流：Decoder-Only 架构
 
 OpenAI 的 GPT 系列提出了一个更为极简的哲学：语言的核心任务就是预测下一个最有可能出现的词。
+
 * **自回归生成**：模型抛弃了复杂的 Encoder，只保留 Decoder。它像玩“文字接龙”一样，基于已有的输入预测下一个词，然后将新词加入输入中不断循环计算。
 * **优势体现**：得益于掩码自注意力机制的保驾护航，Decoder-Only 架构训练目标极致统一，结构简单极其容易进行规模化扩展，且天然完美契合所有的生成式任务（如对话、写作、代码生成等）。
 
@@ -87,11 +109,11 @@ OpenAI 的 GPT 系列提出了一个更为极简的哲学：语言的核心任�
 ## 四、 与大模型交互基础
 
 * **提示工程 (Prompt Engineering)**：提示是我们引导“大脑”输出的语言。
-    * **采样参数**：可以通过调整 `Temperature` (控制随机性与保守性)、`Top-k` 或 `Top-p` (截断低概率词元) 来精确控制模型输出的严谨度或创新性。
-    * **指令与技巧**：现代模型经过“指令调优”后，能够直接遵循自然语言。通过使用零样本/单样本/少样本提示、角色扮演以及 **思维链 (Chain-of-Thought, CoT)** 等技巧，可以显著提升模型处理复杂逻辑和多步推理的准确率。
+  * **采样参数**：可以通过调整 `Temperature` (控制随机性与保守性)、`Top-k` 或 `Top-p` (截断低概率词元) 来精确控制模型输出的严谨度或创新性。
+  * **指令与技巧**：现代模型经过“指令调优”后，能够直接遵循自然语言。通过使用零样本/单样本/少样本提示、角色扮演以及 **思维链 (Chain-of-Thought, CoT)** 等技巧，可以显著提升模型处理复杂逻辑和多步推理的准确率。
 * **文本分词 (Tokenization)**：分词器负责将文本切分成模型能处理的数字序列（Token）。
-    * 现代大模型普遍采用如字节对编码 (BPE) 的**子词分词**策略。它在控制词表大小的同时，有效解决了“未登录词 (OOV)”问题，保留了高频词并能组合生僻词。
-    * 作为开发者，理解分词至关重要，因为它直接决定了上下文窗口的消耗速度、API 的计费成本以及模型处理特定格式文本时的鲁棒性。
+  * 现代大模型普遍采用如字节对编码 (BPE) 的**子词分词**策略。它在控制词表大小的同时，有效解决了“未登录词 (OOV)”问题，保留了高频词并能组合生僻词。
+  * 作为开发者，理解分词至关重要，因为它直接决定了上下文窗口的消耗速度、API 的计费成本以及模型处理特定格式文本时的鲁棒性。
 
 ---
 
