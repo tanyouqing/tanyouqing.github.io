@@ -268,6 +268,46 @@ body {
   @apply mt-2 text-sm text-[var(--muted)] italic;
 }
 
+/* ── Table: full-border mode ── */
+.mdx-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  overflow-x: auto;
+  display: block;
+}
+
+.mdx-content table th,
+.mdx-content table td {
+  border: 1px solid var(--border);
+  padding: 0.55rem 0.85rem;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.mdx-content table th {
+  background-color: var(--card);
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.mdx-content table tr:nth-child(even) td {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.dark .mdx-content table tr:nth-child(even) td {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.mdx-content table tr:hover td {
+  background-color: rgba(6, 182, 212, 0.05);
+}
+
+.dark .mdx-content table tr:hover td {
+  background-color: rgba(201, 165, 90, 0.05);
+}
+
 /* ── Table of Contents Sidebar ── */
 .toc-sidebar {
   position: sticky;
