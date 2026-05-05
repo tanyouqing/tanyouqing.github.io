@@ -97,15 +97,14 @@ export default function CalendarPage() {
                                 <li className="flex items-start gap-3 text-[var(--muted)]">
                                     <div className="mt-1 w-1.5 h-1.5 rounded-full bg-green-500 shrink-0" />
                                     <div>
-                                        <p className="text-[var(--fg)] font-medium text-sm">部署小龙虾</p>
-                                        <p className="text-xs opacity-75 mt-0.5">租云服务器并部署OpenClaw+OpenViking服务</p>
+                                        <p className="text-[var(--fg)] font-medium text-sm">开发openviking插件</p>
+                                        <p className="text-xs opacity-75 mt-0.5">学习openviking插件实现及提供接口，合并冗余opencode插件并迁移实现方式至pi agent</p>
                                     </div>
                                 </li>
                                 <li className="flex items-start gap-3 text-[var(--muted)]">
                                     <div className="mt-1 w-1.5 h-1.5 rounded-full bg-green-500 shrink-0" />
                                     <div>
-                                        <p className="text-[var(--fg)] font-medium text-sm">强化学习的数学原理学习和笔记记录</p>
-                                        <p className="text-xs opacity-75 mt-0.5">学习赵世钰老师《强化学习的数学原理》课程</p>
+                                        <p className="text-[var(--fg)] font-medium text-sm">实现DataAnalysis agent的Deep Research MCP Client接入</p>
                                     </div>
                                 </li>
                             </ul>
@@ -122,21 +121,21 @@ export default function CalendarPage() {
                                 <li className="flex items-start gap-3 text-[var(--muted)]">
                                     <div className="mt-1 w-1.5 h-1.5 rounded-full bg-orange-400 dark:bg-[#c9a55a] shrink-0" />
                                     <div>
-                                        <p className="text-[var(--fg)] font-medium text-sm">雅思备考</p>
+                                        <p className="text-[var(--fg)] font-medium text-sm">长期任务：雅思备考&论文阅读</p>
                                     </div>
                                 </li>
                                 <li className="flex items-start gap-3 text-[var(--muted)]">
                                     <div className="mt-1 w-1.5 h-1.5 rounded-full bg-orange-400 dark:bg-[#c9a55a] shrink-0" />
                                     <div>
-                                        <p className="text-[var(--fg)] font-medium text-sm">Openviking项目学习</p>
-                                        <p className="text-xs opacity-75 mt-0.5">学习Openviking记忆系统实现并探索改进方向</p>
+                                        <p className="text-[var(--fg)] font-medium text-sm">Agent Memory学习和探索</p>
+                                        <p className="text-xs opacity-75 mt-0.5">阅读领域论文，深入学习openviking实现机制并探索改进方向</p>
                                     </div>
                                 </li>
                                 <li className="flex items-start gap-3 text-[var(--muted)]">
                                     <div className="mt-1 w-1.5 h-1.5 rounded-full bg-orange-400 dark:bg-[#c9a55a] shrink-0" />
                                     <div>
-                                        <p className="text-[var(--fg)] font-medium text-sm">完善毕设实验</p>
-                                        <p className="text-xs opacity-75 mt-0.5">融合CLIP和U-Net的后门攻击实验，并探索防御策略</p>
+                                        <p className="text-[var(--fg)] font-medium text-sm">开展后门攻击量化实验</p>
+                                        <p className="text-xs opacity-75 mt-0.5">进行后门攻击框架的量化评估，记录并优化论文</p>
                                     </div>
                                 </li>
                             </ul>

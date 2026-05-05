@@ -11,11 +11,15 @@ interface NewsItem {
 }
 
 const newsData: NewsItem[] = [
-
+    {
+        date: '2026.04',
+        type: 'event',
+        content: '进入字节跳动Openviking团队实习，探索Agent Memory机制',
+    },
     {
         date: '2026.03',
-        type: 'post',
-        content: '开始毕业设计项目，方向为扩散模型后门攻击',
+        type: 'event',
+        content: '毕业设计:方向为扩散模型后门攻击',
     },
     {
         date: '2025.03',
