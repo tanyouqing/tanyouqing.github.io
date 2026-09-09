@@ -6,13 +6,13 @@ import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
     title: 'Cao Jiahao | Personal Academic Homepage',
-    description: '香港中文大学（深圳）人工智能专业 M.Phil 在读。Personal academic homepage of Cao Jiahao.',
-    keywords: ['Cao Jiahao', 'CUHK-Shenzhen', '香港中文大学（深圳）', 'Artificial Intelligence', 'Academic'],
+    description: 'M.Phil. student in Artificial Intelligence at The Chinese University of Hong Kong, Shenzhen. Personal academic homepage of Jiahao Cao.',
+    keywords: ['Cao Jiahao', 'CUHK-Shenzhen', 'CUHK (Shenzhen)', 'Artificial Intelligence', 'Academic'],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="zh-CN" suppressHydrationWarning>
+        <html lang="en" suppressHydrationWarning>
             <head>
                 <script
                     dangerouslySetInnerHTML={{

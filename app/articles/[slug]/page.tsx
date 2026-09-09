@@ -30,7 +30,7 @@ export default function ArticleDetailPage({ params }: { params: { slug: string }
                 href="/articles"
                 className="inline-flex items-center gap-2 text-sm text-[var(--muted)] hover:text-cyan-500 dark:hover:text-[#c9a55a] transition-colors mb-8"
             >
-                <ArrowLeft size={14} /> 返回文章列表
+                <ArrowLeft size={14} /> Back to Articles
             </Link>
 
             <div className="flex gap-12">
@@ -49,7 +49,7 @@ export default function ArticleDetailPage({ params }: { params: { slug: string }
                             <span className="flex items-center gap-1 font-mono">
                                 <Clock size={13} />{meta.date}
                             </span>
-                            {meta.readingTime && <span>约 {meta.readingTime} 分钟阅读</span>}
+                            {meta.readingTime && <span>~{meta.readingTime} min read</span>}
                         </div>
                         {meta.description && (
                             <p className="text-[var(--muted)] leading-relaxed border-l-2 border-cyan-500/50 dark:border-[#c9a55a]/40 pl-4">

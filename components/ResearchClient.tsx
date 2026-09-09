@@ -79,7 +79,7 @@ export function ResearchClient({ papers, tags }: ResearchClientProps) {
                     <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
                     <input
                         type="text"
-                        placeholder="搜索论文..."
+                        placeholder="Search papers..."
                         value={query}
                         onChange={e => setQuery(e.target.value)}
                         className="w-full pl-10 pr-4 py-2.5 rounded-xl
@@ -94,7 +94,7 @@ export function ResearchClient({ papers, tags }: ResearchClientProps) {
             {/* Paper List */}
             <div className="space-y-1">
                 {filtered.length === 0 ? (
-                    <p className="py-12 text-center text-[var(--muted)]">暂无匹配的论文。</p>
+                    <p className="py-12 text-center text-[var(--muted)]">No matching papers.</p>
                 ) : (
                     filtered.map((paper, i) => (
                         <motion.div

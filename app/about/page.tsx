@@ -6,50 +6,50 @@ import Image from 'next/image';
 
 const education = [
     {
-        degree: '人工智能硕士',
-        school: '香港中文大学（深圳）',
+        degree: 'M.Phil. in Artificial Intelligence',
+        school: 'The Chinese University of Hong Kong, Shenzhen',
         period: '2026.09 — 2028.06',
-        description: '目前 M.Phil 在读，导师为刘梦琳教授，主要研究方向为智能体与强化学习。',
+        description: 'Currently an M.Phil. student advised by Prof. Menglin Liu, with a research focus on agents and reinforcement learning.',
         icon: '🎓',
     },
     {
-        degree: '软件工程学士',
-        school: '西安交通大学',
+        degree: 'B.Eng. in Software Engineering',
+        school: 'Xi\'an Jiaotong University',
         period: '2022.09 — 2026.06',
-        description: '主修软件工程，毕业设计为基于文生图大模型的后门攻击系统。',
+        description: 'Major in Software Engineering. Capstone project on backdoor attacks against text-to-image foundation models.',
         icon: '📚',
     },
 ];
 
 const experience = [
     {
-        title: '本科毕业设计',
-        org: '西安交通大学',
+        title: 'Undergraduate Capstone Project',
+        org: 'Xi\'an Jiaotong University',
         period: '2025.09 — 2026.06',
-        description: '完成毕业设计项目，学习扩散模型与后门攻击原理，探索防御方法。',
+        description: 'Studied diffusion models and backdoor attack principles, and explored potential defenses.',
         icon: '🔬',
     },
     {
-        title: '大数据项目实习',
-        org: '成都上程大数据有限公司',
+        title: 'Big Data Project Internship',
+        org: 'Chengdu Shangcheng Big Data Co., Ltd.',
         period: '2025.02 — 2025.03',
-        description: '作为项目经理设计并实现“品好饭”餐厅推荐系统，积累了推荐系统与大数据开发实践经验。',
+        description: 'Designed and implemented the "Pinhaofan" restaurant recommender as a project manager, gaining hands-on experience with recommender systems and big-data development.',
         icon: '🛠️',
     },
     {
-        title: 'NUS Soc Summer Workshop',
-        org: '新加坡国立大学',
+        title: 'NUS SoC Summer Workshop',
+        org: 'National University of Singapore',
         period: '2024.06 — 2024.07',
-        description: '学习机器学习和深度学习的经典模型、基础的金融概念和AI在金融领域的应用，并与小组合作，完成了基于Vue+Flask的股票分析和预测项目实战',
+        description: 'Studied classical machine learning and deep learning models, foundational finance concepts, and AI applications in finance; completed a group stock analysis and prediction project using Vue and Flask.',
         icon: '🛠️',
     }
 ];
 
 const skills = {
-    '编程语言': ['Python', 'Java', 'Go', 'C/C++'],
-    '框架与库': ['PyTorch', 'Langgraph', 'Next.js', 'Spring Boot', 'Flask'],
-    '工具与平台': ['Git', 'Linux', 'MySQL'],
-    '研究方向': ['智能体', '后门攻击', '强化学习'],
+    'Languages': ['Python', 'Java', 'Go', 'C/C++'],
+    'Frameworks': ['PyTorch', 'Langgraph', 'Next.js', 'Spring Boot', 'Flask'],
+    'Tools': ['Git', 'Linux', 'MySQL'],
+    'Research': ['Agents', 'Backdoor Attacks', 'Reinforcement Learning'],
 };
 
 const socialLinks = [
@@ -95,7 +95,7 @@ export default function AboutPage() {
         <div className="max-w-5xl mx-auto px-6 py-12">
             <div className="mb-10 space-y-2">
                 <p className="text-xs font-mono tracking-widest uppercase text-cyan-500 dark:text-[#c9a55a]">About</p>
-                <h1 className="text-4xl font-bold text-[var(--fg)]">关于我</h1>
+                <h1 className="text-4xl font-bold text-[var(--fg)]">About Me</h1>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
@@ -115,7 +115,7 @@ export default function AboutPage() {
 
                             <Image
                                 src="/avatar.jpg"
-                                alt="个人头像"
+                                alt="Avatar"
                                 fill
                                 className="object-cover"
                             />
@@ -178,26 +178,27 @@ export default function AboutPage() {
                 >
                     {/* Bio */}
                     <div className="space-y-3">
-                        <h3 className="text-xl font-semibold text-[var(--fg)]">个人简介</h3>
+                        <h3 className="text-xl font-semibold text-[var(--fg)]">Introduction</h3>
                         <div className="space-y-3 text-[var(--muted)] leading-8">
                             <p>
-                                你好！我是<strong className="text-[var(--fg)]">曹家豪</strong>，来自
-                                <strong className="text-[var(--fg)]">香港中文大学（深圳）</strong>，主修
-                                <strong className="text-[var(--fg)]">人工智能</strong>专业。目前 M.Phil 在读，
-                                导师为{' '}
+                                Hi! I&apos;m <strong className="text-[var(--fg)]">Jiahao Cao</strong>, from{' '}
+                                <strong className="text-[var(--fg)]">The Chinese University of Hong Kong, Shenzhen</strong>, majoring in{' '}
+                                <strong className="text-[var(--fg)]">Artificial Intelligence</strong>. I&apos;m currently an M.Phil. student
+                                advised by{' '}
                                 <a href="https://menglinmileyliu.github.io/index.html" target="_blank" rel="noopener noreferrer"
                                     className="text-[var(--fg)] font-semibold underline decoration-cyan-500/50 dark:decoration-[#c9a55a]/50 underline-offset-2 hover:text-cyan-500 dark:hover:text-[#c9a55a] transition-colors">
-                                    刘梦琳教授
-                                </a>，
-                                对智能体、大模型应用与前沿开发技术充满热情。
+                                    Prof. Menglin Liu
+                                </a>,
+                                and I&apos;m passionate about agents, large-model applications, and cutting-edge development practices.
                             </p>
                             <p>
-                                我相信代码不仅仅是工具，更是思维的延伸，是构建美好数字世界的语言。
-                                在学习与实践中，我喜欢深入理解事物的底层原理，追求优雅、高效的解决方案。
+                                I believe code is more than a tool — it is an extension of thought, and a language for building
+                                better digital worlds. In study and practice, I like to understand first principles and pursue
+                                clean, efficient solutions.
                             </p>
                             <p>
-                                这个主页是我记录与分享的地方——包括技术文章、心灵感悟、项目作品以及学术探索。
-                                欢迎交流！
+                                This homepage is where I record and share — technical notes, reflections, projects, and research.
+                                Feel free to reach out!
                             </p>
                         </div>
                     </div>
@@ -206,7 +207,7 @@ export default function AboutPage() {
                     <div className="space-y-4">
                         <h3 className="text-xl font-semibold text-[var(--fg)] flex items-center gap-2">
                             <GraduationCap size={18} className="text-cyan-500 dark:text-[#c9a55a]" />
-                            教育经历
+                            Education
                         </h3>
                         <div>
                             {education.map((item, i) => (
@@ -219,7 +220,7 @@ export default function AboutPage() {
                     <div className="space-y-4">
                         <h3 className="text-xl font-semibold text-[var(--fg)] flex items-center gap-2">
                             <Briefcase size={18} className="text-orange-400 dark:text-[#d4b978]" />
-                            实践经历
+                            Experience
                         </h3>
                         <div>
                             {experience.map((item, i) => (

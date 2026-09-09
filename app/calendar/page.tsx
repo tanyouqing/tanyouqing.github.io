@@ -58,7 +58,7 @@ export default function CalendarPage() {
         }
 
         monthsData.push({
-            title: `${y}年 ${m + 1}月`,
+            title: new Date(y, m, 1).toLocaleString('en-US', { month: 'long', year: 'numeric' }),
             cells
         });
     }
@@ -71,10 +71,10 @@ export default function CalendarPage() {
             <header className="mb-12">
                 <h1 className="text-3xl md:text-4xl font-bold text-[var(--fg)] inline-flex items-center gap-3">
                     <CalendarIcon size={32} className="text-cyan-500 dark:text-[#c9a55a]" />
-                    工作日历
+                    Working Calendar
                 </h1>
                 <p className="text-[var(--muted)] mt-4 max-w-2xl leading-relaxed">
-                    用于追踪个人的计划与上传记录，展示近期的各项工作及日程。
+                    A space to track plans and upload history — recent work and schedule at a glance.
                 </p>
             </header>
 
@@ -83,7 +83,7 @@ export default function CalendarPage() {
                 <section>
                     <h2 className="text-xl font-semibold text-[var(--fg)] mb-6 flex items-center gap-2">
                         <Clock size={20} className="text-orange-400 dark:text-[#8a7340]" />
-                        近期日程
+                        Recent Schedule
                     </h2>
 
                     <div className="grid md:grid-cols-2 gap-6">
@@ -91,20 +91,20 @@ export default function CalendarPage() {
                         <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm">
                             <h3 className="text-[var(--fg)] font-medium text-lg flex items-center gap-2 mb-4 border-b border-[var(--border)] pb-3">
                                 <CheckCircle2 size={18} className="text-green-500" />
-                                近期完成任务
+                                Completed Tasks
                             </h3>
                             <ul className="space-y-4">
                                 <li className="flex items-start gap-3 text-[var(--muted)]">
                                     <div className="mt-1 w-1.5 h-1.5 rounded-full bg-green-500 shrink-0" />
                                     <div>
-                                        <p className="text-[var(--fg)] font-medium text-sm">开发openviking插件</p>
-                                        <p className="text-xs opacity-75 mt-0.5">学习openviking插件实现及提供接口，合并冗余opencode插件并迁移实现方式至pi agent</p>
+                                        <p className="text-[var(--fg)] font-medium text-sm">Develop OpenViking plugin</p>
+                                        <p className="text-xs opacity-75 mt-0.5">Learned the OpenViking plugin implementation and interfaces, merged redundant OpenCode plugins, and migrated the approach to the pi agent</p>
                                     </div>
                                 </li>
                                 <li className="flex items-start gap-3 text-[var(--muted)]">
                                     <div className="mt-1 w-1.5 h-1.5 rounded-full bg-green-500 shrink-0" />
                                     <div>
-                                        <p className="text-[var(--fg)] font-medium text-sm">实现DataAnalysis agent的Deep Research MCP Client接入</p>
+                                        <p className="text-[var(--fg)] font-medium text-sm">Integrate Deep Research MCP Client into DataAnalysis agent</p>
                                     </div>
                                 </li>
                             </ul>
@@ -114,21 +114,21 @@ export default function CalendarPage() {
                         <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm">
                             <h3 className="text-[var(--fg)] font-medium text-lg flex items-center gap-2 mb-4 border-b border-[var(--border)] pb-3">
                                 <CircleDashed size={18} className="text-orange-400 dark:text-[#c9a55a]" />
-                                计划完成任务
+                                Planned Tasks
                             </h3>
                             <ul className="space-y-4">
 
                                 <li className="flex items-start gap-3 text-[var(--muted)]">
                                     <div className="mt-1 w-1.5 h-1.5 rounded-full bg-orange-400 dark:bg-[#c9a55a] shrink-0" />
                                     <div>
-                                        <p className="text-[var(--fg)] font-medium text-sm">长期任务：论文阅读</p>
+                                        <p className="text-[var(--fg)] font-medium text-sm">Long-term: paper reading</p>
                                     </div>
                                 </li>
                                 <li className="flex items-start gap-3 text-[var(--muted)]">
                                     <div className="mt-1 w-1.5 h-1.5 rounded-full bg-orange-400 dark:bg-[#c9a55a] shrink-0" />
                                     <div>
-                                        <p className="text-[var(--fg)] font-medium text-sm">Agent Memory学习和探索</p>
-                                        <p className="text-xs opacity-75 mt-0.5">阅读领域论文，深入学习openviking实现机制并探索改进方向</p>
+                                        <p className="text-[var(--fg)] font-medium text-sm">Agent Memory study and exploration</p>
+                                        <p className="text-xs opacity-75 mt-0.5">Read papers in the field, dig into OpenViking internals, and explore improvement directions</p>
                                     </div>
                                 </li>
                             </ul>
@@ -140,17 +140,17 @@ export default function CalendarPage() {
                 <section>
                     <h2 className="text-xl font-semibold text-[var(--fg)] mb-6 flex items-center gap-2">
                         <CheckCircle2 size={20} className="text-cyan-500 dark:text-[#d4b978]" />
-                        近三个月上传记录
+                        Upload History (Last 3 Months)
                     </h2>
 
                     <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 md:p-8 shadow-sm flex flex-col">
                         <div className="flex justify-end gap-2 mb-8 text-xs text-[var(--muted)] items-center">
-                            <span>少</span>
+                            <span>Less</span>
                             {/* Deeper empty gray for light mode */}
                             <div className="w-4 h-4 rounded-[4px] bg-slate-200 dark:bg-[#2a2825]" />
                             <div className="w-4 h-4 rounded-[4px] bg-emerald-400 dark:bg-emerald-800" />
                             <div className="w-4 h-4 rounded-[4px] bg-emerald-500 dark:bg-emerald-600" />
-                            <span>多</span>
+                            <span>More</span>
                         </div>
 
                         {/* 3 Months layout */}
@@ -161,7 +161,7 @@ export default function CalendarPage() {
 
                                     {/* Weekday headers aligned on top */}
                                     <div className="grid grid-cols-7 gap-1.5 md:gap-2 mb-2 w-full max-w-[280px]">
-                                        {['日', '一', '二', '三', '四', '五', '六'].map(dayName => (
+                                        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(dayName => (
                                             <div key={dayName} className="text-center text-[0.7rem] text-[var(--muted)]">{dayName}</div>
                                         ))}
                                     </div>
@@ -200,7 +200,7 @@ export default function CalendarPage() {
                                                                 ))}
                                                             </ul>
                                                         ) : (
-                                                            <p className="opacity-75">{cell.isFuture ? "未到来的日期" : "没有任何更新"}</p>
+                                                            <p className="opacity-75">{cell.isFuture ? "Upcoming date" : "No updates"}</p>
                                                         )}
                                                         {/* Tooltip Arrow */}
                                                         <div className="absolute top-full left-1/2 -translate-x-1/2 border-[5px] border-transparent border-t-slate-800 dark:border-t-white" />

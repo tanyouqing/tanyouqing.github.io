@@ -30,7 +30,7 @@ export default function ResearchDetailPage({ params }: { params: { slug: string 
                 href="/research"
                 className="inline-flex items-center gap-2 text-sm text-[var(--muted)] hover:text-orange-400 dark:hover:text-[#d4b978] transition-colors mb-8"
             >
-                <ArrowLeft size={14} /> 返回研究列表
+                <ArrowLeft size={14} /> Back to Research
             </Link>
 
             <div className="flex gap-12">

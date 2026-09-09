@@ -55,7 +55,7 @@ export function ProjectsClient({ projects, tags }: ProjectsClientProps) {
                     <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
                     <input
                         type="text"
-                        placeholder="搜索项目..."
+                        placeholder="Search projects..."
                         value={query}
                         onChange={e => setQuery(e.target.value)}
                         className="w-full pl-10 pr-4 py-2.5 rounded-xl
@@ -69,7 +69,7 @@ export function ProjectsClient({ projects, tags }: ProjectsClientProps) {
 
             {/* Grid */}
             {filtered.length === 0 ? (
-                <p className="py-12 text-center text-[var(--muted)]">暂无匹配的项目。</p>
+                <p className="py-12 text-center text-[var(--muted)]">No matching projects.</p>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
                     {filtered.map((project, i) => (
@@ -118,7 +118,7 @@ export function ProjectsClient({ projects, tags }: ProjectsClientProps) {
                                 </div>
 
                                 <p className="text-sm text-[var(--muted)] leading-relaxed line-clamp-3 flex-1">
-                                    {project.description || '暂无项目简介。'}
+                                    {project.description || 'No project description yet.'}
                                 </p>
 
                                 {/* Tech Stack */}

@@ -70,8 +70,8 @@ export function TableOfContents({ items }: TableOfContentsProps) {
     };
 
     return (
-        <nav aria-label="目录" className="toc-sidebar">
-            <p className="toc-title">目录</p>
+        <nav aria-label="Table of contents" className="toc-sidebar">
+            <p className="toc-title">Contents</p>
             <ul className="toc-list">
                 {items.map((item) => {
                     const isActive = activeId === item.id;

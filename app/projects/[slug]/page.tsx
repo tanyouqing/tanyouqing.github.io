@@ -41,7 +41,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
                 href="/projects"
                 className="inline-flex items-center gap-2 text-sm text-[var(--muted)] hover:text-cyan-500 dark:hover:text-[#c9a55a] transition-colors mb-8"
             >
-                <ArrowLeft size={14} /> 返回项目列表
+                <ArrowLeft size={14} /> Back to Projects
             </Link>
 
             <div className="flex gap-12">

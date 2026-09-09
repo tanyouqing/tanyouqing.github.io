@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: 'Articles | Cao Jiahao',
-    description: '曹嘉豪的技术文章与学习笔记',
+    description: 'Technical articles and study notes by Jiahao Cao',
 };
 
 export default function ArticlesPage() {
@@ -16,9 +16,9 @@ export default function ArticlesPage() {
             {/* Header */}
             <div className="mb-10 space-y-2">
                 <p className="text-xs font-mono tracking-widest uppercase text-violet-400 dark:text-[#d4b978]">Writing</p>
-                <h1 className="text-4xl font-bold text-[var(--fg)]">文章</h1>
+                <h1 className="text-4xl font-bold text-[var(--fg)]">Articles</h1>
                 <p className="text-[var(--muted)]">
-                    记录技术思考、学习笔记与个人观点。共 <span className="text-[var(--fg)] font-medium">{articles.length}</span> 篇文章。
+                    Technical notes, study logs, and personal reflections. <span className="text-[var(--fg)] font-medium">{articles.length}</span> articles in total.
                 </p>
             </div>
 

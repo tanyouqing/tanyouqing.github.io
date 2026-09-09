@@ -32,7 +32,7 @@ export function ArticlesClient({ articles, tags }: ArticlesClientProps) {
                     <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
                     <input
                         type="text"
-                        placeholder="搜索文章..."
+                        placeholder="Search articles..."
                         value={query}
                         onChange={e => setQuery(e.target.value)}
                         className="w-full pl-10 pr-4 py-2.5 rounded-xl
@@ -47,7 +47,7 @@ export function ArticlesClient({ articles, tags }: ArticlesClientProps) {
             {/* Article List */}
             <div className="divide-y divide-[var(--border)]">
                 {filtered.length === 0 ? (
-                    <p className="py-12 text-center text-[var(--muted)]">暂无匹配的文章。</p>
+                    <p className="py-12 text-center text-[var(--muted)]">No matching articles.</p>
                 ) : (
                     filtered.map((article, i) => (
                         <motion.article
@@ -75,7 +75,7 @@ export function ArticlesClient({ articles, tags }: ArticlesClientProps) {
                                         {article.date}
                                     </span>
                                     {article.readingTime && (
-                                        <span className="text-xs text-[var(--muted)]">约 {article.readingTime} 分钟阅读</span>
+                                        <span className="text-xs text-[var(--muted)]">~{article.readingTime} min read</span>
                                     )}
                                     <div className="flex gap-1.5 flex-wrap">
                                         {article.tags.slice(0, 3).map(tag => (

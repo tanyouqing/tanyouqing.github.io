@@ -14,17 +14,17 @@ const newsData: NewsItem[] = [
     {
         date: '2026.04',
         type: 'event',
-        content: '字节跳动Openviking团队实习，探索Agent Memory机制',
+        content: 'Joined ByteDance Openviking team as an intern, exploring Agent Memory mechanisms',
     },
     {
         date: '2026.03',
         type: 'event',
-        content: '基于文生图大模型的后门攻击系统',
+        content: 'Thesis project: backdoor attack system based on text-to-image foundation models',
     },
     {
         date: '2025.03',
         type: 'event',
-        content: '成都上程大数据公司实习，方向为大数据算法与推荐系统',
+        content: 'Internship at Chengdu Shangcheng Big Data, focusing on big-data algorithms and recommender systems',
     },
 ];
 
