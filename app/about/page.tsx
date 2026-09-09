@@ -7,16 +7,16 @@ import Image from 'next/image';
 const education = [
     {
         degree: '人工智能硕士',
-        school: '香港中文大学（深圳）-（预计）',
-        period: '2026.09 — 预计 2028.06',
-        description: '即将入读，主要研究方向为智能体与强化学习。',
+        school: '香港中文大学（深圳）',
+        period: '2026.09 — 2028.06',
+        description: '目前 M.Phil 在读，导师为刘梦琳教授，主要研究方向为智能体与强化学习。',
         icon: '🎓',
     },
     {
         degree: '软件工程学士',
         school: '西安交通大学',
         period: '2022.09 — 2026.06',
-        description: '主修软件工程，毕业设计为扩散模型的后门攻击。',
+        description: '主修软件工程，毕业设计为基于文生图大模型的后门攻击系统。',
         icon: '📚',
     },
 ];
@@ -132,11 +132,11 @@ export default function AboutPage() {
                         </h2>
                         <p className="text-sm text-[var(--muted)] flex items-center justify-center gap-1">
                             <GraduationCap size={13} className="text-cyan-500 dark:text-[#c9a55a]" />
-                            Software Engineering B.Sc.
+                            Artificial Intelligence M.Phil.
                         </p>
                         <p className="text-sm text-[var(--muted)] flex items-center justify-center gap-1">
                             <MapPin size={13} className="text-orange-400 dark:text-[#d4b978]" />
-                            Xi'an Jiaotong University
+                            The Chinese University of Hong Kong (Shenzhen)
                         </p>
                     </div>
 
@@ -182,8 +182,13 @@ export default function AboutPage() {
                         <div className="space-y-3 text-[var(--muted)] leading-8">
                             <p>
                                 你好！我是<strong className="text-[var(--fg)]">曹家豪</strong>，来自
-                                <strong className="text-[var(--fg)]">西安交通大学</strong>，主修
-                                <strong className="text-[var(--fg)]">软件工程</strong>专业。目前即将开始硕士阶段的学习旅程，
+                                <strong className="text-[var(--fg)]">香港中文大学（深圳）</strong>，主修
+                                <strong className="text-[var(--fg)]">人工智能</strong>专业。目前 M.Phil 在读，
+                                导师为{' '}
+                                <a href="https://menglinmileyliu.github.io/index.html" target="_blank" rel="noopener noreferrer"
+                                    className="text-[var(--fg)] font-semibold underline decoration-cyan-500/50 dark:decoration-[#c9a55a]/50 underline-offset-2 hover:text-cyan-500 dark:hover:text-[#c9a55a] transition-colors">
+                                    刘梦琳教授
+                                </a>，
                                 对智能体、大模型应用与前沿开发技术充满热情。
                             </p>
                             <p>

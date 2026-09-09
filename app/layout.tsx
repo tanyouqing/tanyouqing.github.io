@@ -6,8 +6,8 @@ import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
     title: 'Cao Jiahao | Personal Academic Homepage',
-    description: '西安交通大学软件工程专业学生，即将攻读硕士研究生。Personal academic homepage of Cao Jiahao.',
-    keywords: ['Cao Jiahao', 'XJTU', '西安交通大学', 'Software Engineering', 'Academic'],
+    description: '香港中文大学（深圳）人工智能专业 M.Phil 在读。Personal academic homepage of Cao Jiahao.',
+    keywords: ['Cao Jiahao', 'CUHK-Shenzhen', '香港中文大学（深圳）', 'Artificial Intelligence', 'Academic'],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

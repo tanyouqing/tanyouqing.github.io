@@ -63,7 +63,7 @@ export default function HomePage() {
                         </h1>
                         <p className="text-base text-[var(--muted)] flex items-center justify-center gap-1.5">
                             <MapPin size={14} className="text-cyan-500 dark:text-[#c9a55a]" />
-                            西安交通大学 · 软件工程
+                            CUHK（SZ） SAI
                         </p>
                     </motion.div>
 
@@ -118,12 +118,16 @@ export default function HomePage() {
                         </div>
 
                         <p className="text-[var(--muted)] leading-8 text-base">
-                            你好！我是曹家豪，来自<span className="text-[var(--fg)] font-medium">西安交通大学</span>，
-                            主修<span className="text-[var(--fg)] font-medium">软件工程</span>专业。
-                            即将踏上硕士研究生的学习旅程，对前沿人工智能技术和软件系统设计充满热情。
+                            你好！我是曹家豪，来自<span className="text-[var(--fg)] font-medium">香港中文大学（深圳）</span>，
+                            主修<span className="text-[var(--fg)] font-medium">人工智能</span>专业。
+                            目前 M.Phil 在读，导师为{' '}
+                            <a href="https://menglinmileyliu.github.io/index.html" target="_blank" rel="noopener noreferrer"
+                                className="text-[var(--fg)] font-medium underline decoration-cyan-500/50 dark:decoration-[#c9a55a]/50 underline-offset-2 hover:text-cyan-500 dark:hover:text-[#c9a55a] transition-colors">
+                                刘梦琳教授
+                            </a>。
                         </p>
                         <p className="text-[var(--muted)] leading-8 text-base">
-                            我热爱用代码解决实际问题，对强化学习、智能体及软件工程方法论有浓厚兴趣，希望持续有vibe coding idea产出。
+                            对强化学习、智能体及软件工程方法论有浓厚兴趣。
                             这里记录我的学习思考、项目探索和研究成果。
                         </p>
 

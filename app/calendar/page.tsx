@@ -121,7 +121,7 @@ export default function CalendarPage() {
                                 <li className="flex items-start gap-3 text-[var(--muted)]">
                                     <div className="mt-1 w-1.5 h-1.5 rounded-full bg-orange-400 dark:bg-[#c9a55a] shrink-0" />
                                     <div>
-                                        <p className="text-[var(--fg)] font-medium text-sm">长期任务：雅思备考&论文阅读</p>
+                                        <p className="text-[var(--fg)] font-medium text-sm">长期任务：论文阅读</p>
                                     </div>
                                 </li>
                                 <li className="flex items-start gap-3 text-[var(--muted)]">
@@ -129,13 +129,6 @@ export default function CalendarPage() {
                                     <div>
                                         <p className="text-[var(--fg)] font-medium text-sm">Agent Memory学习和探索</p>
                                         <p className="text-xs opacity-75 mt-0.5">阅读领域论文，深入学习openviking实现机制并探索改进方向</p>
-                                    </div>
-                                </li>
-                                <li className="flex items-start gap-3 text-[var(--muted)]">
-                                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-orange-400 dark:bg-[#c9a55a] shrink-0" />
-                                    <div>
-                                        <p className="text-[var(--fg)] font-medium text-sm">开展后门攻击量化实验</p>
-                                        <p className="text-xs opacity-75 mt-0.5">进行后门攻击框架的量化评估，记录并优化论文</p>
                                     </div>
                                 </li>
                             </ul>
