@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Github, Mail, Linkedin, ExternalLink, MapPin, GraduationCap, Briefcase } from 'lucide-react';
+import { Github, Mail, Linkedin, ExternalLink, MapPin, GraduationCap, Briefcase, Contact } from 'lucide-react';
 import Image from 'next/image';
 
 const education = [
@@ -54,9 +54,10 @@ const skills = {
 
 const socialLinks = [
     { icon: Github, label: 'GitHub', href: 'https://github.com/tanyouqing', color: 'hover:text-slate-200' },
-    { icon: Mail, label: 'Email', href: 'mailto:caojiahao@stu.xjtu.edu.cn', color: 'hover:text-orange-400' },
+    { icon: Mail, label: 'Email', href: 'mailto:jiahaocao@link.cuhk.edu.cn', color: 'hover:text-orange-400' },
     { icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com', color: 'hover:text-blue-400' },
     { icon: ExternalLink, label: 'Scholar', href: 'https://scholar.google.com', color: 'hover:text-cyan-400' },
+    { icon: Contact, label: 'Resume', href: '/Jiahao_Cao_Resume_EN.pdf', color: 'hover:text-emerald-400' },
 ];
 
 function TimelineItem({ item, i }: {

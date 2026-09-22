@@ -13,7 +13,7 @@ export function Footer() {
                         className="text-[var(--muted)] hover:text-cyan-500 dark:hover:text-[#c9a55a] transition-colors" aria-label="GitHub">
                         <Github size={18} />
                     </Link>
-                    <Link href="mailto:caojiahao@stu.xjtu.edu.cn"
+                    <Link href="mailto:jiahaocao@link.cuhk.edu.cn"
                         className="text-[var(--muted)] hover:text-orange-400 dark:hover:text-[#d4b978] transition-colors" aria-label="Email">
                         <Mail size={18} />
                     </Link>
