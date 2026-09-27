@@ -151,7 +151,7 @@ export default function HomePage() {
                         {/* Quick Links */}
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
                             {[
-                                { icon: BookOpen, label: 'Articles', href: '/articles', color: 'text-violet-400 dark:text-[#d4b978]' },
+                                { icon: BookOpen, label: 'Blogs', href: '/articles', color: 'text-violet-400 dark:text-[#d4b978]' },
                                 { icon: Code2, label: 'Projects', href: '/projects', color: 'text-cyan-400 dark:text-[#c9a55a]' },
                                 { icon: ArrowRight, label: 'Research', href: '/research', color: 'text-orange-400 dark:text-[#e2c67e]' },
                             ].map(({ icon: Icon, label, href, color }) => (

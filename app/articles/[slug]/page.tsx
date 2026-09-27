@@ -30,7 +30,7 @@ export default function ArticleDetailPage({ params }: { params: { slug: string }
                 href="/articles"
                 className="inline-flex items-center gap-2 text-sm text-[var(--muted)] hover:text-cyan-500 dark:hover:text-[#c9a55a] transition-colors mb-8"
             >
-                <ArrowLeft size={14} /> Back to Articles
+                <ArrowLeft size={14} /> Back to Blogs
             </Link>
 
             <div className="flex gap-12">

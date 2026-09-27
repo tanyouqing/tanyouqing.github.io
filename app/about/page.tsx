@@ -129,7 +129,7 @@ export default function AboutPage() {
                     {/* Name & Position */}
                     <div className="text-center space-y-1">
                         <h2 className="text-xl font-bold text-[var(--fg)]">
-                            <span className="gradient-text">Cao</span> Jiahao · 曹家豪
+                            <span className="gradient-text">Cao</span> Jiahao
                         </h2>
                         <p className="text-sm text-[var(--muted)] flex items-center justify-center gap-1">
                             <GraduationCap size={13} className="text-cyan-500 dark:text-[#c9a55a]" />

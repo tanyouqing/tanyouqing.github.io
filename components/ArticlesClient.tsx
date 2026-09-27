@@ -32,7 +32,7 @@ export function ArticlesClient({ articles, tags }: ArticlesClientProps) {
                     <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
                     <input
                         type="text"
-                        placeholder="Search articles..."
+                        placeholder="Search blogs..."
                         value={query}
                         onChange={e => setQuery(e.target.value)}
                         className="w-full pl-10 pr-4 py-2.5 rounded-xl
@@ -47,7 +47,7 @@ export function ArticlesClient({ articles, tags }: ArticlesClientProps) {
             {/* Article List */}
             <div className="divide-y divide-[var(--border)]">
                 {filtered.length === 0 ? (
-                    <p className="py-12 text-center text-[var(--muted)]">No matching articles.</p>
+                    <p className="py-12 text-center text-[var(--muted)]">No matching blogs.</p>
                 ) : (
                     filtered.map((article, i) => (
                         <motion.article
