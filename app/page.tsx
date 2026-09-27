@@ -14,7 +14,7 @@ export default function HomePage() {
     return (
         <>
             {/* ───────────── HERO SECTION ───────────── */}
-            <section className="relative -mt-24 pt-24 min-h-[90vh] flex flex-col items-center justify-center overflow-hidden">
+            <section className="relative -mt-24 pt-24 min-h-screen flex flex-col items-center justify-center overflow-hidden">
                 {/* Aurora background */}
                 <div className="aurora-bg" />
 
