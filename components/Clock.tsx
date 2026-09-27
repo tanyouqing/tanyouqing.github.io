@@ -13,14 +13,14 @@ export function Clock() {
 
     if (!time) return null;
 
-    const dateStr = time.toLocaleDateString('zh-CN', {
+    const dateStr = time.toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
         weekday: 'long',
     });
 
-    const timeStr = time.toLocaleTimeString('zh-CN', {
+    const timeStr = time.toLocaleTimeString('en-US', {
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
