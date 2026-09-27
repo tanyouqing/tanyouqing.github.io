@@ -14,12 +14,12 @@ export default function HomePage() {
     return (
         <>
             {/* ───────────── HERO SECTION ───────────── */}
-            <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden">
+            <section className="relative -mt-24 pt-24 min-h-[90vh] flex flex-col items-center justify-center overflow-hidden">
                 {/* Aurora background */}
                 <div className="aurora-bg" />
 
                 {/* Clock — top right */}
-                <div className="absolute top-4 right-6 z-10">
+                <div className="absolute top-28 right-6 z-10">
                     <Clock />
                 </div>
 

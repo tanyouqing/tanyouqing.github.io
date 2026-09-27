@@ -23,7 +23,7 @@ export function Navbar() {
         <header className="fixed top-0 left-0 right-0 z-50">
             <nav className="mx-auto max-w-6xl px-6 py-4">
                 <div className="flex items-center justify-between
-          bg-white/70 dark:bg-[#1a1917]/80 backdrop-blur-xl
+          bg-white/35 dark:bg-[#1a1917]/50 backdrop-blur-xl
           border border-white/30 dark:border-[#2a2825]/80
           rounded-2xl px-5 py-3 shadow-lg shadow-black/5">
                     {/* Logo */}
