@@ -344,6 +344,14 @@ body {
   background-color: rgba(6, 182, 212, 0.05);
 }
 
+/* Long equations should scroll inside the article on narrow screens. */
+.mdx-content .katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+}
+
 .dark .mdx-content table tr:hover td {
   background-color: rgba(201, 165, 90, 0.05);
 }
