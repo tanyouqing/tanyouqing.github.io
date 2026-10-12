@@ -2,7 +2,7 @@
 title: "CS336 L04：注意力替代方案与混合专家"
 date: "2026-08-04"
 description: "线性注意力、门控状态模型、稀疏注意力与 MoE：从计算形式到路由、负载均衡和通信成本。"
-tags: ["CS336","Attention","MoE"]
+tags: ["CS336"]
 category: "笔记"
 ---
 

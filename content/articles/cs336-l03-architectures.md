@@ -2,7 +2,7 @@
 title: "CS336 L03：Transformer 架构与超参数"
 date: "2026-07-31"
 description: "梳理归一化、门控 FFN、RoPE、训练稳定性和注意力变体，追踪张量形状、参数量与 KV cache。"
-tags: ["CS336","LLM","Transformer"]
+tags: ["CS336", "LLM"]
 category: "笔记"
 ---
 

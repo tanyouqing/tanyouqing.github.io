@@ -2,7 +2,7 @@
 title: "从基础强化学习到大模型后训练与 Agentic RL"
 date: "2026-10-03"
 description: "衔接已有强化学习笔记，理解 GAE、PPO、RLHF、DPO、GRPO，以及多步工具智能体的奖励、信用分配与训练系统"
-tags: ["强化学习", "大模型", "后训练", "Agentic RL"]
+tags: ["RL", "LLM", "Agent"]
 ---
 
 # 1. 从已有基础出发：这篇笔记要连接什么

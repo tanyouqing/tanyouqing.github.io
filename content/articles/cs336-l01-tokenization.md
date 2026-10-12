@@ -2,7 +2,7 @@
 title: "CS336 L01：分词与字节级 BPE"
 date: "2026-07-29"
 description: "从 Unicode 和 UTF-8 到 BPE 训练、编码、特殊 token，以及词表大小与序列长度的权衡。"
-tags: ["CS336","LLM","Tokenizer","BPE"]
+tags: ["CS336", "LLM"]
 category: "笔记"
 ---
 

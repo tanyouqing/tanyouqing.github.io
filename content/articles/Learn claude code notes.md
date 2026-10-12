@@ -2,7 +2,7 @@
 title: "Claude Code 学习笔记"
 date: "2026-06-05"
 description: "从 agent loop、工具调用、上下文、权限、记忆、子代理与自动化等角度拆解 Claude Code 的基本心智模型。"
-tags: ["Claude Code", "Agent", "LLM"]
+tags: ["Agent", "LLM"]
 category: "笔记"
 ---
 

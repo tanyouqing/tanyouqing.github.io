@@ -2,7 +2,7 @@
 title: "CS336 L02：PyTorch 与资源核算"
 date: "2026-07-30"
 description: "张量、混合精度、自动微分与训练状态，结合 FLOPs、显存和 Roofline 模型估算训练成本。"
-tags: ["CS336","PyTorch","训练系统"]
+tags: ["CS336"]
 category: "笔记"
 ---
 
