@@ -2,7 +2,7 @@
 title: "飞书 LongMemory"
 date: "2026-05-21"
 description: "面向飞书与 OpenClaw 的个人工作记忆中间层，支持真实事件采集、LLM 记忆抽取、用户画像建模、上下文注入与主动提醒闭环。"
-tags: ["Agent", "飞书", "记忆系统"]
+tags: ["LLM", "Agent"]
 tech: ["FastAPI", "SQLite", "OpenClaw", "Feishu", "LLM"]
 github: "https://github.com/tanyouqing/feishu-campus-longmemory"
 image: "🧠"

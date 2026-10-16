@@ -2,7 +2,7 @@
 title: "CS336 Assignment 1：从零构建与预训练语言模型"
 date: "2026-10-16"
 description: "从字节级 BPE 到 Decoder-only Transformer，梳理 RMSNorm、Pre-Norm、SwiGLU、RoPE，以及语言模型的预训练、评估与生成流程。"
-tags: ["CS336", "LLM", "预训练"]
+tags: ["LLM", "CS336"]
 tech: ["Python", "PyTorch", "BPE", "Transformer"]
 github: "https://github.com/tanyouqing/CS336-Assigment1"
 image: "🔤"

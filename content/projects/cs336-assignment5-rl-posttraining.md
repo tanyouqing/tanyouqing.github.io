@@ -2,7 +2,7 @@
 title: "CS336 Assignment 5：从策略梯度到 LLM 后训练"
 date: "2026-10-16"
 description: "以可验证数学奖励为主线，推导 baseline、GRPO 家族、重要性采样、PPO 裁剪与 GSPO，逐项对应 SFT、DPO 和 RL 的实际训练 loss。"
-tags: ["CS336", "LLM", "强化学习", "后训练"]
+tags: ["LLM", "CS336", "RL"]
 tech: ["Python", "PyTorch", "Transformers", "GRPO", "DPO"]
 github: "https://github.com/tanyouqing/CS336-Assignment5"
 image: "🎯"
