@@ -1,15 +1,15 @@
 ---
-title: "从基础强化学习到大模型后训练与 Agentic RL"
+title: "从基础强化学习到大模型后训练：PPO、DPO、GRPO 与 OPD"
 date: "2026-10-03"
-description: "衔接已有强化学习笔记，理解 GAE、PPO、RLHF、DPO、GRPO，以及多步工具智能体的奖励、信用分配与训练系统"
-tags: ["RL", "LLM", "Agent"]
+description: "衔接强化学习基础，理解 GAE、PPO、RLHF、DPO、GRPO，以及学生采样、教师反馈的 On-Policy Distillation。"
+tags: ["RL", "LLM"]
 ---
 
 # 1. 从已有基础出发：这篇笔记要连接什么
 
-本文承接[强化学习的数学原理笔记（上）](/articles/强化学习的数学原理笔记(上))与[强化学习的数学原理笔记（下）](/articles/强化学习的数学原理笔记(下))。前两篇覆盖 Bellman 方程、MC、TD、Sarsa、Q-learning、函数近似、策略梯度与 Actor-Critic；这里继续回答：怎样用 RL 优化大模型生成的回答，又怎样把训练扩展到会调用工具、修改环境的 agent？
+本文承接[强化学习的数学原理笔记（上）](/articles/强化学习的数学原理笔记(上))与[强化学习的数学原理笔记（下）](/articles/强化学习的数学原理笔记(下))。前两篇覆盖 Bellman 方程、MC、TD、Sarsa、Q-learning、函数近似、策略梯度与 Actor-Critic；这里继续回答：怎样用偏好、可验证奖励和教师反馈，优化大模型的生成分布？
 
-以提供的 HTML 学习路线为组织参考，结合原始论文和官方文档补充推导与实现边界。材料核对日期为 2026-10-03；训练框架的配置与默认参数应以实际使用的版本为准。
+本文结合原始论文和官方实现说明训练目标与数据流。原后训练内容整理于 2026-10-03，OPD 内容补充核对于 2026-10-17；训练框架的配置与默认参数应以实际使用的版本为准。
 
 知识依赖关系是：
 
@@ -20,14 +20,11 @@ Policy Gradient / Actor-Critic / Advantage
                   ↓
         LLM policy 与后训练目标
           ├─ 偏好反馈：RLHF / DPO
-          └─ 可验证反馈：RLVR / GRPO
-                  ↓
-         多轮工具交互与 Agentic RL
-                  ↓
-   环境 + 轨迹 + verifier + 信用分配 + 训练系统
+          ├─ 可验证反馈：RLVR / GRPO
+          └─ 教师概率反馈：OPD
 ```
 
-RLHF、RLVR 描述反馈来源与训练范式；PPO、GRPO 描述策略优化方法；DPO 描述直接偏好优化方法；agentic 描述交互任务的结构。它们属于不同维度，例如“使用 GRPO 的 agentic RLVR”就是合理组合。
+RLHF、RLVR 描述反馈来源与训练范式；PPO、GRPO 描述策略优化方法；DPO 描述直接偏好优化方法；OPD 描述在学生自身采样的前缀上向教师蒸馏。这些概念分别对应训练流程中的不同环节。
 
 # 2. 后训练在优化什么：SFT 与 RL 的分工
 
@@ -110,7 +107,7 @@ $$
 =\exp\big(\log\pi_\theta(a_t\mid s_t)-\log\pi_{\mathrm{old}}(a_t\mid s_t)\big).
 $$
 
-这是局部 surrogate 中的动作概率修正，不是对整条轨迹分布进行完全校正。随着策略远离采样策略，旧状态分布与旧优势估计的适用性也会变差。
+这个局部 surrogate 修正给定状态下的动作概率。随着策略远离采样策略，旧状态分布与旧优势估计的适用性也会变差。
 
 TRPO 通过新旧策略的 KL 约束控制更新；PPO-Clip 使用更容易优化的目标：
 
@@ -268,7 +265,7 @@ DPO 通常直接在固定偏好对上训练，无须独立 reward model、critic
 
 $z_\theta$ 衡量：相对 reference，模型是否更偏向 chosen 而不是 rejected。初始 policy 与 reference 相同则 $z=0$，对应 loss 为 $\log2$；当 $z$ 增大，loss 下降。
 
-序列 logprob 是回答 token 的条件 logprob 之和。基础 DPO 目标不是逐 token 的 PPO ratio，也不是天然的平均 token logprob。长度、偏好标注、prompt 配对和 response mask 都会影响训练。
+基础 DPO 使用回答 token 的条件 logprob 之和来定义序列 logprob，逐 token 的 PPO ratio、平均 token logprob 则对应不同的目标。长度、偏好标注、prompt 配对和 response mask 都会影响训练。
 
 DPO 的 $\beta$ 来自正则化目标，但在有限数据训练时也直接缩放分类 logit 与梯度；不能简单把它解释成“调大就一定更接近 reference”。固定数据 DPO 可以用于 agent 轨迹偏好，但一旦轨迹涉及不同环境观察，必须明确比较对象和条件上下文。
 
@@ -318,244 +315,147 @@ $$
 
 进一步阅读时可看 [DAPO，Yu 等，2025 预印本](https://arxiv.org/abs/2503.14476)与 [Understanding R1-Zero-Like Training，Liu 等，2025 预印本](https://arxiv.org/abs/2503.20783)，关注它们讨论的采样、长度和归一化问题，再判断哪些与当前任务有关。
 
-# 9. 用三个问题区分 PPO、DPO 与 GRPO
+# 9. OPD：在学生自己生成的前缀上向教师学习
+
+## 9.1 为什么不只训练教师写好的答案
+
+OPD（On-Policy Distillation，同策略蒸馏）由学生生成回答，教师在这些回答的每个前缀上提供下一 token 的概率反馈。学生答错的回答同样可以进入训练。
+
+用教师答案做 SFT 时，学生看到的是教师会走到的前缀；部署时却需要接着自己的输出生成。学生一旦走偏，后面的上下文可能从未在示范中出现。OPD 把监督放到学生实际访问的前缀上，缓解这种训练与生成分布不匹配。[GKD，Agarwal 等，2023 预印本、ICLR 2024](https://arxiv.org/abs/2306.13649)
+
+“On-policy”描述前缀由谁生成，不指定唯一损失。GKD 可以选择 forward KL、reverse KL 或 JSD，也可混合不同来源的数据。下面主要介绍 reverse-KL OPD，并区分全词表损失与采样策略梯度两种计算方式。[GKD §3.1](https://arxiv.org/html/2306.13649v3)
+
+## 9.2 教师和学生怎样比较下一 token
+
+记学生为 $p_\theta$，冻结教师为 $q$，学生生成的前缀为 $s_t=(x,y_{<t})$。先把这个前缀视为固定输入，比较同一词表 $\mathcal V$ 上的分布：
+
+$$
+\begin{aligned}
+D_{\mathrm{FKL}}(q\Vert p_\theta\mid s_t)
+&=\sum_{v\in\mathcal V}q(v\mid s_t)
+\log\frac{q(v\mid s_t)}{p_\theta(v\mid s_t)},\\
+D_{\mathrm{RKL}}(p_\theta\Vert q\mid s_t)
+&=\sum_{v\in\mathcal V}p_\theta(v\mid s_t)
+\log\frac{p_\theta(v\mid s_t)}{q(v\mid s_t)}.
+\end{aligned}
+$$
+
+FKL 用教师概率加权，惩罚学生漏掉教师认为可能的选项；RKL 用学生概率加权，更直接惩罚学生把概率分给教师不认可的选项。容量受限时，两者会产生不同折中，常称为 mode-covering 与 mode-seeking。适合采用哪种散度，取决于任务与学生容量。[MiniLLM，Gu 等，ICLR 2024](https://arxiv.org/abs/2306.08543)
+
+能够取得完整 logits 时，可以在采样得到的固定前缀上直接计算全词表 KL，再对学生 logits 反传。学生采样决定训练访问哪些前缀，教师概率决定更新方向；直接把学生 token 当作正确标签做交叉熵，会丢掉教师的监督信息。
+
+## 9.3 只取得已采样 token 的 logprob 时怎样训练
+
+如果教师能返回学生已生成 token 的条件 logprob，就可以使用采样估计。用本批冻结的学生行为策略 $p_{\mathrm{old}}$ 生成 token，保存：
+
+$$
+\ell_{t}^{\mathrm{old}}=\log p_{\mathrm{old}}(y_t\mid s_t),
+\qquad
+\ell_{t}^{T}=\log q(y_t\mid s_t).
+$$
+
+为当前 token 定义固定的教师反馈：
+
+$$
+A_t=\operatorname{stopgrad}
+\left(\ell_t^{T}-\ell_t^{\mathrm{old}}\right).
+$$
+
+教师相对学生更认可这个 token 时，$A_t>0$；反之为负。这个学习权重直接由采样 token 的 log-ratio 构造。在相应学生分布下，$-A_t$ 的期望对应非负的 reverse KL，单个采样值则可以为正或为负。
+
+例如可以用 token importance-sampling surrogate：
+
+$$
+\rho_t(\theta)=\exp\left(
+\log p_\theta(y_t\mid s_t)-\ell_t^{\mathrm{old}}\right),
+\qquad
+\mathcal L_{\mathrm{OPD}}=-\frac{\sum_t m_t\rho_t(\theta)A_t}
+{\sum_t m_t},
+$$
+
+其中 $m_t$ 是回答 token 的有效 mask。下降这个 loss，会增加正反馈 token 的概率、降低负反馈 token 的概率。Thinking Machines 的 2025 年 OPD 博客采用这种逐 token 反馈，令折扣为零，只优化当前 token，不累计未来反馈；它是已有 OPD 工作上的一种具体配方。[Thinking Machines：实现与伪代码](https://thinkingmachines.ai/blog/on-policy-distillation/)
+
+这里的 teacher 提供学习目标，old policy 记录采样分布。若另外加入 reference KL，还要明确它的约束对象和系数，避免重复计入同一项。
+
+## 9.4 为什么不能直接对采样 log-ratio 求导
+
+固定前缀 $s$ 时，全词表 RKL 的梯度为：
+
+$$
+\nabla_\theta D_{\mathrm{RKL}}
+=\mathbb E_{v\sim p_\theta}
+\left[\left(\log p_\theta(v\mid s)-\log q(v\mid s)\right)
+\nabla_\theta\log p_\theta(v\mid s)\right].
+$$
+
+求导中出现的常数 $1$ 项，因为 $\mathbb E[\nabla\log p_\theta]=0$ 而抵消。令 $p_{\mathrm{old}}=p_\theta$，上一节 surrogate 的初始梯度便给出这个条件 KL 梯度的采样估计。
+
+但是，把离散采样结果固定后，直接对 `mean(student_logp - teacher_logp)` 反传，只会得到采样的 score gradient，漏掉分布加权中的 log-ratio，不能实现上述 RKL 梯度。需要完整词表求和，或明确构造带 `stopgrad` 权重的策略梯度 loss。
+
+还要区分固定前缀的条件 KL 与整段序列 KL：后者的梯度也包含前面 token 改变后续前缀分布的影响。GKD 不对采样序列的分布反传；MiniLLM 则分析了当前步与未来回报项。折扣为零的局部 OPD 不能称为完整序列 KL 的精确梯度。[GKD Algorithm 1](https://arxiv.org/html/2306.13649v3)、[MiniLLM §2.2](https://arxiv.org/html/2306.08543v4)
+
+同一批数据更新多步后，固定的 $A_t$、old 前缀与当前学生会逐渐不匹配，因此通常在有限次更新后重新采样。动作概率比仅修正局部动作概率；裁剪、baseline 或混合其他奖励应作为额外设计记录。
+
+## 9.5 一轮 OPD 的数据流
+
+```text
+准备 prompts，冻结教师，记录学生采样版本
+  → 学生生成回答，保存 token ids、old logprob 与 mask
+  → 教师读取相同 prompt 和学生前缀，给已生成 token 打 logprob
+  → 构造并冻结逐 token 的教师反馈
+  → 学生重新前向，计算 current logprob 和 surrogate loss
+  → 更新学生，监控分布距离与任务表现
+  → 刷新采样策略，生成下一批回答
+```
+
+下面只展示单个更新的损失计算。输入已对齐到每个回答 token，shape 都是 $(B,T)$；`mask` 排除 prompt、padding 和终止后的无效位置。采用有效 token 总数归一化，且假定采样策略与所记录 logprob 的分布一致。
+
+```python
+# old_logp 与 teacher_logp 来自本批数据，均不参与反传
+advantage = (teacher_logp - old_logp).detach()
+ratio = (current_logp - old_logp.detach()).exp()
+loss = -(ratio * advantage * mask).sum() / mask.sum()
+```
+
+空 mask 的批次需要跳过。教师对整段学生文本做带 causal mask 的 teacher-forcing 前向，可并行获得各位置分数，无需让教师自回归重写每个答案；教师前向本身仍有计算与显存成本。[verl OPD 官方文档](https://github.com/verl-project/verl/blob/main/docs/algo/opd.md)
+
+## 9.6 一个固定前缀上的手算
+
+设下一 token 只有 A、B、C 三种，学生概率为 $(0.6,0.3,0.1)$，教师为 $(0.2,0.5,0.3)$。使用自然对数：
+
+| token | 学生概率 | 教师概率 | 反馈 $\log q-\log p$ |
+| --- | --- | --- | --- |
+| A | 0.6 | 0.2 | $-1.099$ |
+| B | 0.3 | 0.5 | $+0.511$ |
+| C | 0.1 | 0.3 | $+1.099$ |
+
+学生抽到 A 时倾向降低其概率，抽到 B 或 C 时倾向提高其概率。共享 softmax 参数会同时改变其他选项，因此不能把每个方向理解成互不影响的独立概率增减。
+
+完整 RKL 约为：
+
+$$
+0.6\log 3+0.3\log 0.6+0.1\log(1/3)
+\approx 0.3961.
+$$
+
+采样反馈的期望是 $-0.3961$，但一次抽样并不等于这个期望。全词表损失在每个前缀上利用所有候选；采样形式更省输出分布的传输与存储，却有采样方差。
+
+## 9.7 适用条件与训练代价
+
+- 监督密度：OPD 在学生自己的前缀上获得逐 token 反馈，比仅用终局成功/失败奖励的 RLVR 更密集。使用过程奖励的 RL 也能提供中间反馈。
+- 教师质量：分数表示教师在该前缀下如何续写。前文已经写错时，一个错误结论仍可能有较高条件概率，因此还要用任务结果检查推理质量。
+- 初始能力：学生需要采样到有价值的行为。覆盖不足时，可用 SFT 扩展初始能力，再与 OPD 或可验证奖励结合。
+- 接口与对齐：直接比较概率需要对应的词表、tokenizer 和 token 边界，以及教师对已生成 token 的条件 logprob。跨 tokenizer 蒸馏需要专门的对齐方法。
+- 采样分布：上述推导采用温度为 1 的学生分布。温度、top-k/top-p 改变后，要按实际行为分布检查 logprob、支持集与概率修正。
+- 资源成本：教师通常冻结，只做前向；学生仍需 rollout 和反向更新。基础 OPD 可以省去 critic 与组内奖励统计，教师评分则增加了计算和显存开销。
+
+## 9.8 用三个问题区分 PPO、DPO、GRPO 与 OPD
 
 | 方法 | 数据与反馈 | advantage / 学习权重 | 典型训练组件 |
 | --- | --- | --- | --- |
-| PPO-based RLHF / RLVR | 近期策略 rollout，RM 或 verifier 打分 | critic + GAE | actor、old logprob、critic、奖励；reference 可选或按目标加入 |
+| PPO-based RLHF / RLVR | 近期策略 rollout，RM 或 verifier 打分 | critic + GAE | actor、old logprob、critic、奖励；reference 按目标加入 |
 | 标准离线 DPO | 固定 chosen/rejected 偏好对 | 相对 reference 的序列 logprob 分差 | actor、reference、偏好数据 |
 | GRPO | 同 prompt 多个近期 rollout 与 reward | 组内相对 reward | actor、old logprob、奖励；典型形式无 critic |
+| 本节采样式 OPD | 学生 rollout，教师对相同 token 前缀给概率反馈 | 冻结的逐 token 教师/学生 log-ratio | student、teacher、old logprob；不要求偏好对或 learned critic |
 
-先问数据来自哪里，再问什么定义好坏，最后问怎样把反馈转成参数更新。不能因为 DPO 没有在线交互就认为它与 RL 目标毫无关系，也不能因为 GRPO 省略 critic 就认为它不需要信用分配。
-
-# 10. Agentic RL：模型行动后，外部世界会改变
-
-单轮文本生成主要沿前缀展开。agent 可以查询数据库、读取文件、执行代码、搜索网页、提交编辑，再根据观察继续决策：
-
-```text
-任务 → 模型输出动作 → harness 解析与执行 → 环境变化
-                 ↑                         ↓
-                 └──── 新上下文/观察 ────────┘
-                            ↓
-                    成功、失败或预算终止
-```
-
-## 10.1 区分真实 state 与模型 observation
-
-设潜在 state $z_k$ 包含文件/数据库状态、任务目标、工具内部状态和 harness 控制状态。环境转移为 $z_{k+1}\sim P(\cdot\mid z_k,a_k)$。模型收到的上下文 $c_k$ 通常只是部分信息，并可能经过截断、检索、摘要或记忆更新。
-
-策略实际是 $\pi_\theta(a_k\mid c_k)$。完整历史可用于 POMDP 的历史条件策略，但有限窗口或摘要未必是充分统计量，不能直接声称“prompt 就是完整 Markov state”。
-
-动作也有两个时间尺度：生成 token 是微观动作，完整 tool call 或一次模型响应是宏观动作。宏观动作可能消耗不同数量 token 或真实时间。若要折扣调用时间/持续时间，可用半马尔可夫视角；若只优化固定预算下成功率，也可以选择不按 token 折扣。必须先定义奖励和时间单位。
-
-## 10.2 训练哪个 policy
-
-“训练 agent”可能是更新工具调用 LLM、更新 router、更新 planner，或选择性训练多个角色。第一轮实验应明确哪些输出来自待训练 policy，哪些来自固定程序、其它模型或工具。改变提示词、检索和记忆也能提高 agent，但若没有更新 policy 参数，应与模型 RL 训练区分报告。
-
-# 11. 奖励与信用分配：最终成功怎样传到具体行动
-
-## 11.1 Outcome、process 与成本
-
-Outcome reward 在结尾检查任务成功；process reward 对中间进展评分。前者易于定义但稀疏，后者更密集但可能把错误过程或评审偏好写进目标。
-
-可以设：
-
-$$
-R(\tau)=w_s\,\mathbf1[\text{success}]
--w_c\,\operatorname{cost}(\tau)-w_v\,\operatorname{violations}(\tau).
-$$
-
-这是设计选择而非通用最佳公式。权重可能让模型宁可快速失败，也不尝试昂贵但必要的操作。对于必须满足的约束，可以考虑硬性失败规则或约束优化，并分别报告成功、成本和违规率，避免总分掩盖问题。
-
-若额外加入启发式奖励，不自动保证原最优策略不变。理论上的 potential-based shaping 采用 $r'_{k+1}=r_{k+1}+\gamma\Phi(z_{k+1})-\Phi(z_k)$，其保持策略性质还依赖终止处理等条件；把“调用工具次数”或“写了规划”直接加分则是另一个目标。[Reward shaping 原始论文，Ng、Harada 与 Russell，ICML 1999](https://people.eecs.berkeley.edu/~russell/papers/icml99-shaping.pdf)。
-
-## 11.2 将完整任务回报分给所有调用
-
-简单起点是所有待训练调用共享最终 $R(\tau)-b$。即使中间工具和 harness 不可微，若它们的转移机制不依赖训练参数，轨迹概率中的参数梯度仍来自模型动作项：
-
-$$
-\nabla_\theta\log P_\theta(\tau)
-=\sum_{k\in\mathcal C_\theta}\nabla_\theta\log\pi_\theta(a_k\mid c_k).
-$$
-
-这解释了为何可以用最终结果训练多次调用，但成功轨迹里冗余或错误的动作也会一起得到正权重。更细的方案可用调用级 critic、局部可验证奖励、重置到中间状态的分支 rollout，或反事实比较。每种方案都会增加假设、计算成本或评估噪声。
-
-Agent Lightning 原始工作将执行与训练解耦，并分解为模型调用级 transition；其报告的实现将最终回报分配给各调用。该接口并不意味着长时程信用分配已被解决。[Agent Lightning，Luo 等，2025 预印本](https://arxiv.org/abs/2508.03680)。
-
-## 11.3 回合、调用、token 三个粒度
-
-```text
-一个 rollout：完整任务 τ
-  ├─ call 1：prompt → assistant tokens → tool action
-  ├─ 环境观察
-  ├─ call 2：新 prompt → assistant tokens → 下一动作
-  └─ call 3：新 prompt → 最终回答
-
-回报按 rollout 验证
-信用可按 rollout / call / token 分配
-最终 policy loss 落在被训练模型生成的 action tokens 上
-```
-
-归一化要单独决定：等权 rollout、等权 call 和等权 token 对应不同训练权重。一个 agent 因重复失败产生十次调用，不能仅因为拆成十个训练 sample 就被无意赋予另一条两次调用轨迹的五倍权重。
-
-# 12. Harnessed Agentic RL：保持实际调用上下文
-
-harness 管理工具、上下文、记忆、子任务、错误恢复和终止条件。采用 harnessed 训练时，部署的 harness 继续拥有执行循环，trainer 通过模型服务边界收集并优化调用。
-
-HTML 提及的 [Agent Lightning v1.0，He 等，2026-08 预印本](https://arxiv.org/abs/2608.17528)已核对。论文强调 token 重编码、sample 合并、advantage 和 loss normalization 等问题；以下用教学例子解释它们对训练的影响，并不把该框架的所有实现选择视为唯一解。
-
-## 12.1 字符串相同，不保证 token 前缀相同
-
-一次调用产生 tokens $a_1$，下一次 prompt 由聊天模板重新序列化。即使显示文本相同，role marker、模板、边界分词或摘要也可能改变 token IDs。若前后 token-prefix 不连续，就不能把调用直接拼成一条保持原采样条件的序列。
-
-训练概率比必须在原动作的实际条件上下文计算：
-
-$$
-\rho_{k,t}=\exp\left(
-\log\pi_\theta(a_{k,t}\mid c_k,a_{k,<t})
--\log\pi_{\mathrm{beh}}(a_{k,t}\mid c_k,a_{k,<t})\right).
-$$
-
-不能拿重建后另一个 $c'_k$ 的 current logprob 与旧 $c_k$ 下的 behavior logprob 相减。应保存精确 prompt/action tokens 和采样设置；只有兼容时才合并，否则保留为独立调用样本并维护 rollout 关联。
-
-## 12.2 GRPO 的 group 应保留任务身份
-
-设同一初始任务生成两条 rollout，奖励分别是 $1$ 与 $0$；成功轨迹拆成十个 samples，失败轨迹拆成两个。按 samples 计算均值会得到 $10/12$；按 rollout 计算则是 $1/2$。前者让上下文拆分方式改变了 baseline。
-
-一种可解释的起点是按相同初始任务与可比环境状态组织 rollout group，先计算 rollout-level advantage，再分配给对应调用/token；loss weighting 另行指定。随机环境中，即使初始条件相同，结果仍有转移噪声，应保留 seed 并用多次运行评估。
-
-# 13. 从轨迹到训练张量：mask、logprob 与数据契约
-
-## 13.1 哪些 token 参与 loss
-
-| token 类型 | 模型能否作为上下文读取 | 待训练 actor 的 policy loss |
-| --- | --- | --- |
-| system / user prompt | 能 | 通常为 0 |
-| 待训练模型生成的 reasoning / answer | 能 | 按训练设定为 1 |
-| 待训练模型生成的工具名称/参数 | 能 | 通常为 1 |
-| tool observation / 环境反馈 | 能 | 为 0 |
-| 固定外部模型输出 | 能 | 对当前 actor 通常为 0 |
-| padding | 应被 attention mask 屏蔽 | 为 0 |
-
-loss mask 与 attention mask 是不同对象。环境文本不参与 actor loss，仍可能是后续决策必需的上下文。工具反馈由环境产生，不是当前 actor 采样的动作。多轮训练的实际 mask 和模板一致性可参考 [verl multi-turn 官方文档](https://verl.readthedocs.io/en/latest/sglang_multiturn/multiturn.html)。
-
-## 13.2 关键形状与移位
-
-令 $B$ 为调用样本数，$L$ 为 padded sequence 长度，$K$ 为词表大小：
-
-| 张量 | 典型形状 | 含义 |
-| --- | --- | --- |
-| `input_ids`、attention mask | $(B,L)$ | 实际序列与可见位置 |
-| logits | $(B,L,K)$ | 每个位置预测下一个 token |
-| sampled-token logprob | $(B,L-1)$ | `logits[:, :-1]` gather `input_ids[:, 1:]` |
-| old/ref/current logprob | $(B,L-1)$ | 相同 token 与条件上下文的三种概率 |
-| action loss mask | $(B,L-1)$ | 按被预测 token 对齐的参与更新位置 |
-| advantage / value target | 与 action positions 对齐 | 广播或逐位置估计的学习信号 |
-
-常见错误是 logits 未移位、mask 仍对齐输入位置，导致训练了错误 token；另一个错误是在相同 prompt 复制出的上下文上重复计算前几次 assistant 输出的 loss。
-
-## 13.3 rollout 至少应该保存什么
-
-```text
-task_id / rollout_id / group_id / call_id / parent_call_id
-environment_version / harness_version / tool_schema_version
-policy_version / tokenizer_version / chat_template_version
-exact_prompt_token_ids / sampled_action_token_ids
-behavior_logprobs / temperature / sampling_configuration
-action_loss_mask / tool_calls / tool_observations
-reward_components / success / termination_reason / costs
-seed / retry_id / timestamps
-```
-
-采样 temperature、top-p、top-k 会改变行为分布。必须明确 old logprob 表示原模型分布还是实际采样分布，以及 trainer 如何处理两者差异；学习阶段可以先用简单、可核对的采样设置。LoRA 只改变更新参数的方式，不替代 PPO/GRPO 的目标和数据语义。
-
-对无法获取权重或训练接口的黑盒模型，可以收集评估轨迹或优化外层策略，但不能假设能按本篇公式直接更新其参数。
-
-# 14. 训练系统：rollout 与 optimizer 如何接起来
-
-```text
-任务采样与环境 reset
-  → 冻结行为策略版本
-  → 并行 rollout：LLM ↔ harness ↔ 工具环境
-  → verifier 检查结果与约束
-  → 构造 token/mask/logprob 对齐的 samples
-  → 计算 advantages 与训练权重
-  → minibatch 更新 policy（PPO 时还更新 critic）
-  → 同步推理模型权重
-  → 在独立任务上评估并保存 checkpoint
-```
-
-同步模式最容易确认哪个策略生成哪批数据。异步模式让推理、工具执行和训练重叠，提高吞吐，但 rollout 可能来自较旧模型。应记录 policy version、限制 staleness，并定义接受、丢弃或校正旧数据的规则。clipping 本身不足以保证任意陈旧轨迹有效。
-
-reset 应恢复真实初始状态。训练任务若共享被上一条轨迹污染的数据库或文件系统，会改变任务分布。并行执行需隔离沙箱；网络重试还应处理去重与幂等，避免同一环境动作重复执行、同一轨迹重复计数。
-
-## 14.1 看哪些指标才能判断真的变好
-
-| 观察维度 | 指标与问题 |
-| --- | --- |
-| 任务能力 | 独立任务 success rate / pass@1，是否真的完成目标？ |
-| 探索 | group reward 方差、全失败/全成功比例，是否有对比信号？ |
-| 更新稳定性 | KL、ratio、clip fraction、entropy、gradient norm |
-| 成本 | 输出 token、工具调用、时间、超时率 |
-| 奖励可靠性 | reward 分项、隐藏检查、hacking 案例 |
-| 泛化 | 新任务、扰动环境、改变模板后的表现 |
-| 系统一致性 | stale rollout 比例、模板不一致、去重/拼接失败 |
-
-PPO 中再关注 critic loss 与 explained variance；GRPO 中关注组内统计和长度分布。reward 上升而独立成功率不升，可能是评分漏洞、过拟合或评估条件不同。
-
-pass@1、pass@k 和 best-of-N 使用不同采样预算。更高测试时预算带来的改善应与模型权重学习分开分析，比较必须匹配推理预算、工具权限与 harness。
-
-# 15. 为后续训练准备的最小实践路线
-
-以下是按依赖关系安排的学习练习，不是未经测量的算力承诺。
-
-| 阶段 | 最小练习 | 完成后应该解释清楚 |
-| --- | --- | --- |
-| GAE / PPO | 小离散环境手算 GAE，再跑 mini PPO | advantage、old logprob、clip 正负分支、terminal mask |
-| LLM 张量 | 小模型给固定回答计算并核对 logprob | token shift、回答 mask、序列与 token logprob |
-| 偏好优化 | 小批 chosen/rejected 数据做 DPO | reference、分差、独立偏好评估 |
-| RLVR / GRPO | 自动验证的数学或代码短任务 | group advantage、零方差组、长度权重 |
-| Agentic RL | 小型文件/SQL 沙箱里的多步工具任务 | reset、观测、动作、调用级记录、独立 verifier |
-
-## 15.1 一个贯穿例子：在沙箱文件中查找并更新数据
-
-任务为读取虚构库存数据、计算指定条件下的总量、将结果写入指定文件。工具限定为列文件、读文件、执行受限计算、写结果；每个 rollout 从相同只读种子数据和新输出目录开始。
-
-verifier 从隔离的任务定义重新计算正确答案，检查输出路径、数值和输入未被非法修改。固定最大调用/token 预算，最终输出存在但答案错误仍为失败。隐藏 verifier 不由 agent 修改。
-
-先测量初始 SFT policy 成功率。如果工具格式几乎全部错误，应先用少量示范建立能力；若已有部分成功，再为同一任务生成多个 rollout，使用 outcome reward 做 GRPO 起点。保留失败轨迹、调用日志与停止原因。
-
-首先比较原 SFT、成功轨迹筛选后 SFT、同预算 RL。再按实际失败分析决定是否引入调用级 critic、process reward、课程或更细信用分配。固定训练/验证/测试任务划分，既测相似新任务，也测文件名、布局、工具错误等扰动。
-
-## 15.2 首次完整训练前的检查
-
-1. 用同一个样本在推理端和训练端比较实际 token IDs 与条件 logprob。
-2. 手工检查一个多轮样本，确认工具观察可读但不参与 actor loss。
-3. 初始 current 与 behavior 相同时，ratio 应接近 $1$；误差超出预期时查上下文、采样和数值后端。
-4. 手算一组奖励与 advantage，检查全相同奖励、截断和终止边界。
-5. 独立运行 verifier，测试伪造结果、修改输入、格式错误与超时。
-6. 明确按 rollout、call 还是 token 加权，并确认多调用轨迹权重符合设计。
-
-这些检查比一开始同时尝试大量算法变体更容易定位失败来源。
-
-# 16. 论文与官方资料：按知识依赖阅读
-
-以下论文均链接到原始来源。表中年份使用首次预印本年份，GAE 另标正式 ICLR 发表信息；其它预印本不在本文中推断其最终录用状态。本文的手算例子、数据契约与实践路线为教学综合，不是任何一篇论文的完整复现。
-
-| 材料 | 作者 / 年份与状态 | 解决的问题与阅读重点 |
-| --- | --- | --- |
-| [GAE](https://arxiv.org/abs/1506.02438) | Schulman 等，2015 预印本；ICLR 2016 | 指数加权 TD residual，理解偏差/方差与边界条件 |
-| [TRPO](https://arxiv.org/abs/1502.05477) | Schulman 等，2015 预印本 | 用策略距离约束解释稳定更新的动机 |
-| [PPO](https://arxiv.org/abs/1707.06347) | Schulman 等，2017 预印本 | clipped surrogate 与一批数据的多轮更新 |
-| [InstructGPT](https://arxiv.org/abs/2203.02155) | Ouyang 等，2022 预印本 | SFT、偏好数据、reward model 与 PPO 组成完整流程 |
-| [DPO](https://arxiv.org/abs/2305.18290) | Rafailov 等，2023 预印本 | KL 正则目标到偏好分类 loss 的解析连接 |
-| [DeepSeekMath](https://arxiv.org/abs/2402.03300) | Shao 等，2024 预印本 | GRPO 如何以组内统计替代 learned critic |
-| [DeepSeek-R1](https://arxiv.org/abs/2501.12948) | DeepSeek-AI，2025 技术报告 | R1-Zero 与 R1 的训练流程、规则奖励与边界 |
-| [DAPO](https://arxiv.org/abs/2503.14476) | Yu 等，2025 预印本 | 长序列 RL 的采样与训练设计 |
-| [Understanding R1-Zero-Like Training](https://arxiv.org/abs/2503.20783) | Liu 等，2025 预印本 | base model、reward 与归一化对训练的影响 |
-| [Agent Lightning](https://arxiv.org/abs/2508.03680) | Luo 等，2025 预印本 | 将 agent execution 与 RL trainer 解耦，关注 credit 的实现限制 |
-| [Agent Lightning v1.0](https://arxiv.org/abs/2608.17528) | He 等，2026 预印本 | harness 下 token 连续性、样本组织与训练权重 |
-| [TRL GRPO 文档](https://huggingface.co/docs/trl/grpo_trainer) | 官方动态文档 | 将公式映射到实际 loss、归一化与监控配置 |
-| [verl 多轮文档](https://verl.readthedocs.io/en/latest/sglang_multiturn/multiturn.html) | 官方动态文档 | multi-turn rollout、assistant mask 与模板一致性 |
-
-阅读时可反复对照五个对象：**谁产生数据、什么定义 reward、谁给出 advantage、哪些 action 参与更新、训练与部署的上下文是否一致**。这五个对象共同决定一次后训练实验究竟在学什么。
+先问数据来自哪里，再问什么定义好坏，最后问怎样把反馈转成参数更新。PPO、GRPO 解决策略优化问题，DPO 利用偏好对，OPD 描述学生采样与教师监督的蒸馏方式；它们可以共享基础设施，也可以在训练流程中组合。
