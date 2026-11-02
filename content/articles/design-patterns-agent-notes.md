@@ -1,6 +1,6 @@
 ---
 title: "设计模式与 Agent 系统借鉴"
-date: "2026-10-20"
+date: "2026-11-01"
 description: "系统梳理 GoF 23 种经典设计模式，并探讨它们在 Agent 系统、多智能体协作框架中的借鉴价值。"
 tags: ["设计模式", "Agent"]
 category: "笔记"
