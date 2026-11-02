@@ -228,6 +228,10 @@ body {
   @apply text-xl font-semibold mt-5 mb-2;
 }
 
+.mdx-content h4 {
+  @apply text-lg font-semibold mt-4 mb-2;
+}
+
 .mdx-content p {
   @apply leading-7 mb-4 text-[var(--muted)];
 }
